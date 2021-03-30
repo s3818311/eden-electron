@@ -3,8 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start:examinee": "craco start --config config/examinee.config.js",
-    "start:examiner": "craco start --config config/examiner.config.js",
+    "start": "craco start",
     "build": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject"
