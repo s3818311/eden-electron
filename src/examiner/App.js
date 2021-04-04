@@ -1,5 +1,7 @@
-import "./tailwind.css";
+import "tailwindcss/tailwind.css";
 
-function App() {}
+function App() {
+    return "Hello world";
+}
 
 export default App;
