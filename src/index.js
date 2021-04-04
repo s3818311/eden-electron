@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./compiled.css";
 import reportWebVitals from "./reportWebVitals";
 
 function importBuildTarget() {
