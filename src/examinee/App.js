@@ -1,12 +1,12 @@
-import "tailwindcss/tailwind.css";
+import "./tailwind.css";
 import React from "react";
+import { BrowserRouter, } from "react-router-dom";
+import LoginView from "./views/LoginView";
 
-function App() {
-	return (
-		<>
-			<div className="w-10 h-10 bg-red-100"></div>
-		</>
-	);
-}
 
+const App = () => (
+	<BrowserRouter>
+		<LoginView path="/login" />
+	</BrowserRouter>
+);
 export default App;
