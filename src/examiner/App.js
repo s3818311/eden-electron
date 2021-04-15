@@ -15,13 +15,13 @@ function App() {
         <Sidebar/>
 
         <Switch>
-          <Route to="/">
+          <Route exact path="/" component="Dashboard">
             <Dashboard/>
           </Route>
-          <Route to="/exam">
+          <Route exact path="/exam" component="Exam">
             <Exam />
           </Route>
-          <Route to="/student">
+          <Route exact path="/student" component="Student">
             <Student />
           </Route>
         </Switch>
