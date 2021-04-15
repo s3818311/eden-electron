@@ -3,68 +3,55 @@ import {AiFillCaretRight, AiFillCaretLeft, AiOutlineDashboard, AiOutlineTable, A
 
 
 const Sidebar = () => {
-	// use state 
-	const [sidebar, toggleSideBar] = useState(true);
-	const showSideBar = () => toggleSideBar(!sidebar);
+  // use state 
+  const [isOpen, toggleSideBar] = useState(true);
+  const showSideBar = () => toggleSideBar(!isOpen);
+  const renderBtn = () => isOpen ? <AiFillCaretLeft size={25}/> : <AiFillCaretRight size={25}/>;
+  
+  //list of pages
+  const NavItems = [
+    {
+      title: "Dashboard",
+      path: "/", 
+      icon: <AiOutlineDashboard size={isOpen ? 25 : 30} className="transition-all"/>
+    }, 
+    {
+      title: "Exam Manager", 
+      path: "/", 
+      icon: <AiOutlineTable size={isOpen ? 25 : 30} className="transition-all"/>
+    },
+    {
+      title: "Student Manager", 
+      path: "/",
+      icon: <AiFillBook size={isOpen ? 25 : 30} className="transition-all"/>
+    }
+  ];
 
-	//list of pages
-	const NavItems = [
-		{
-			title: "Dashboard",
-			path: "/", 
-			icon: <AiOutlineDashboard size={ sidebar ? 22:30}/>
-		}, 
-		{
-			title: "Exam Manager", 
-			path: "/", 
-			icon: <AiOutlineTable size={ sidebar ? 22:30}/>
-		},
-		{
-			title: "Student Manager", 
-			path: "/",
-			icon: <AiFillBook size={ sidebar ? 22:30}/>
-		}
-	];
+  return (
+    <>
+      <div className={`flex flex-col h-screen bg-rmit-blue transition-all ${isOpen ? "w-3/12" : "w-16"}`}>
+        {NavItems.map( (item, index) => {
+          // Mapping each item in nav item to li
+          return (
+            <div key={index} className="flex flex-row items-center p-4 text-xl text-white gap-x-5 hover:bg-nav-hover"> 
+              <div className="inline-block">
+                {item.icon} 
+              </div>
+              <div className={isOpen ? "inline-block" : "hidden"}>
+                {item.title}
+              </div>
+            </div>
+          );
+        })}
 
-	return (
-		<>
-			<nav className = { sidebar ? "w-3/12 flex flex-col h-screen bg-rmit-blue" : "w-16 flex flex-col h-screen bg-rmit-blue"}>
-
-				<ul className = ''>
-					{NavItems.map( (item, index) => {
-						// Mapping each item in nav item to li
-						return (
-                            
-							<li key={index} className = 'font-serif text-lg text-white pl-4 pt-2 pb-2 hover:bg-nav-hover' > 
-
-								<div className='inline-block pt-1'>
-									{item.icon} 
-								</div>
-								<div className= {sidebar ? "inline-block pl-2" : "hidden"}>
-									{item.title}
-								</div>
-                                
-							</li>
-                        
-						);
-					})}
-				</ul>
-
-				<div className='mt-auto w-full text-center'>
-					<span className= {sidebar ? " hidden" : "text-lg text-white text-center"}>
-						<button onClick={showSideBar}>
-							<AiFillCaretRight size={20}/>
-						</button>
-					</span>
-					<span className ={sidebar ? " text-lg text-white text-center" : "hidden"}>
-						<button  onClick={showSideBar}> 
-							<AiFillCaretLeft size={20}/>
-						</button>
-					</span>
-				</div>
-			</nav>
-		</>
-	);
+        <div className="w-full h-10 mt-auto cursor-pointer hover:bg-nav-hover" onClick={showSideBar}>
+          <div className="flex items-center justify-center h-full text-white">
+            {renderBtn()}
+          </div>
+        </div>
+      </div>
+    </>
+  );
 };
 
 export default Sidebar;
