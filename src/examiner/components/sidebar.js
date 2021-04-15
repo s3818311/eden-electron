@@ -1,6 +1,6 @@
 import React, { useState } from "react";	
 import {AiFillCaretRight, AiFillCaretLeft, AiOutlineDashboard, AiOutlineTable, AiFillBook} from "react-icons/ai";
-
+import {NavLink} from "react-router-dom";
 
 const Sidebar = () => {
   // use state 
@@ -17,12 +17,12 @@ const Sidebar = () => {
     }, 
     {
       title: "Exam Manager", 
-      path: "/", 
+      path: "/exam", 
       icon: <AiOutlineTable size={isOpen ? 25 : 30} className="transition-all"/>
     },
     {
       title: "Student Manager", 
-      path: "/",
+      path: "/student",
       icon: <AiFillBook size={isOpen ? 25 : 30} className="transition-all"/>
     }
   ];
@@ -33,14 +33,18 @@ const Sidebar = () => {
         {NavItems.map( (item, index) => {
           // Mapping each item in nav item to li
           return (
-            <div key={index} className="flex flex-row items-center p-4 text-xl text-white gap-x-5 hover:bg-nav-hover"> 
-              <div className="inline-block">
-                {item.icon} 
-              </div>
-              <div className={isOpen ? "inline-block" : "hidden"}>
-                {item.title}
-              </div>
-            </div>
+            <div key={index} className = 'font-serif text-lg text-white pl-4 pt-2 pb-2 hover:bg-nav-hover'> 
+
+				<NavLink exact to={item.path} className ="flex flex-col flex-row" activeClassName="text-red-500 bg-nav-hover" >
+					<div className='inline-block pt-1'>
+						{item.icon} 
+					</div>
+					<div className= {isOpen ? "inline-block pl-2" : "hidden"}>
+						{item.title}
+					</div>
+				</NavLink>   
+
+			</div>
           );
         })}
 
