@@ -3,7 +3,7 @@ import AddBtn from "../components/addBtn";
 
 const Exam = () => {
   return (
-    <div className="w-9/12 h-screen px-10 pb-10">
+    <div className="flex-grow h-screen px-10 pb-10">
       <div className="flex items-center border-b-2 h-1/6 border-rmit-red">
         <div className="text-3xl text-rmit-blue">
           Exam Manager
