@@ -1,5 +1,4 @@
 import React from "react";
-import AddBtn from "../components/addBtn";
 
 const Exam = () => {
   return (
@@ -11,7 +10,9 @@ const Exam = () => {
       </div>
       <div className="pt-2 h-5/6">
         <div className="flex justify-end w-full">
-          <AddBtn></AddBtn>
+          <div className="inline-block px-5 py-1 text-white cursor-pointer rounded-md bg-rmit-red">
+            Add new class
+          </div>
         </div>
 
         <div className="flex flex-row flex-wrap">
