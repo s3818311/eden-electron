@@ -39,7 +39,8 @@
         "jsx-quotes": [
             "error",
             "prefer-double"
-        ]
+        ],
+        "no-trailing-spaces": "error"
     },
     "settings": {
         "react": {
