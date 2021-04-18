@@ -1,22 +1,22 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-//Component for tabs in exam folder
+//Component for class tabs in exam manager
 
 const NavTab = () => {
 
   const TabItems = [
     {
       "title": "Exam list",
-      "path": "/exam/folder/list"
+      "path": "/exam/class/list"
     },
     {
       "title": "Participants",
-      "path":"/exam/folder/participant"
+      "path":"/exam/class/participant"
     },
     {
       "title": "Results",
-      "path":"/exam/folder/result"
+      "path":"/exam/class/result"
     }
   ];
 
