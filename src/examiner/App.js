@@ -10,17 +10,9 @@ import {BrowserRouter, Switch, Route } from "react-router-dom";
 import Class from "./pages/Class";
 
 function App() {
-  // eslint-disable-next-line no-unused-vars
-  const [data, setData] = React.useState(null);
-
-  React.useEffect(() => {
-    fetch("/api")
-      .then((res) => res.json())
-      .then((data) => setData(data.message));
-  }, []);
 
   return (
-    <>  
+    <>
       <BrowserRouter>
         <Sidebar/>
 
@@ -38,7 +30,7 @@ function App() {
             <Class/>
           </Route>
         </Switch>
-        
+
       </BrowserRouter>
     </>
   );
