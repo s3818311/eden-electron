@@ -1,10 +1,10 @@
 import React, { useRef } from "react";
 
 const Student = () => {
-  const inputFile = useRef(null); 
+  const inputFile = useRef(null);
   const onButtonClick = () => inputFile.current.click();
 
-  return (   
+  return (
     <div className="flex-grow h-screen px-10 pb-10">
       <div className="flex items-center border-b-2 h-1/6 border-rmit-red">
         <div className="text-3xl text-rmit-blue">

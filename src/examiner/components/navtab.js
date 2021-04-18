@@ -38,7 +38,6 @@ const NavTab = () => {
 
         <div className="flex flex-auto border-b-2 border-rmit-red">
         </div>
-        
       </div>
     </div>
   );

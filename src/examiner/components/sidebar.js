@@ -19,7 +19,7 @@ const Sidebar = () => {
       title: "Exam Manager",
       path: "/exam",
       icon: <AiOutlineTable size={isOpen ? 30 : 35} className="transition-all"/>
-      
+
     },
     {
       title: "Student Manager",
@@ -35,11 +35,11 @@ const Sidebar = () => {
           NavItems.map((item, index) => {
           // Mapping each item in nav item to li
             return (
-              <NavLink 
-                exact 
-                to={item.path} 
-                className={`py-5 text-white hover:bg-nav-hover ${isOpen ? "px-6" : ""}`} 
-                activeClassName="text-red-500 bg-nav-hover" 
+              <NavLink
+                exact
+                to={item.path}
+                className={`py-5 text-white hover:bg-nav-hover ${isOpen ? "px-6" : ""}`}
+                activeClassName="text-red-500 bg-nav-hover"
                 key={index}
               >
                 <div className={`flex flex-row items-center text-xl gap-x-5 ${isOpen ? "" : "justify-center"}`}>

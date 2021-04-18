@@ -20,14 +20,13 @@ function App() {
           <Route exact path="/" component="Dashboard">
             <Dashboard/>
           </Route>
+          <Route path="/exam/class/:tab(list|participant|result)" render={({match})=> <Class tabName = {match.params.tab} />}>
+          </Route>
           <Route exact path="/exam" component="Exam">
             <Exam />
           </Route>
           <Route exact path="/student" component="Student">
             <Student />
-          </Route>
-          <Route path="/exam/class" component="ExamFolder">
-            <Class/>
           </Route>
         </Switch>
 

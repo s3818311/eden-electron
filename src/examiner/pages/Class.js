@@ -1,9 +1,9 @@
 import React from "react";
 import NavTab from "../components/navtab";
-import { Route } from "react-router";
+import PropTypes from "prop-types";
 
 
-const Class = () => {
+const Class = ({tabName}) => {
   return (
     <div className="w-9/12 h-screen px-10 pb-10">
       <div className="flex items-center h-1/6">
@@ -13,21 +13,25 @@ const Class = () => {
       </div>
       <NavTab/>
       <div className="pt-2 h-5/6">
-
+        {tabName}
         <div className="flex flex-row flex-wrap">
-          <Route exact path="/exam/class/examList">
-
-          </Route>
-          <Route exact path="/exam/class/participant">
-              
-          </Route>
-          <Route exact path="/exam/class/result">
-              
-          </Route>
+          {
+            tabName === "list" && <div>This is exam list tab</div>
+          }
+          {
+            tabName === "participant" && <div>This is participant tab</div>
+          }
+          {
+            tabName === "result" && <div>This is result tab</div>
+          }
         </div>
       </div>
     </div>
   );
+};
+
+Class.propTypes = {
+  tabName : PropTypes.string
 };
 
 export default Class;
