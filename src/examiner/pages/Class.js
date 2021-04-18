@@ -3,25 +3,25 @@ import NavTab from "../components/navtab";
 import { Route } from "react-router";
 
 
-const ExamFolder = () => {
+const Class = () => {
   return (
     <div className="w-9/12 h-screen px-10 pb-10">
       <div className="flex items-center h-1/6">
         <div className="text-3xl text-rmit-blue">
-          Exam Folder
+          Class
         </div>
       </div>
       <NavTab/>
       <div className="pt-2 h-5/6">
 
         <div className="flex flex-row flex-wrap">
-          <Route exact path="/exam/folder/list">
+          <Route exact path="/exam/class/examList">
 
           </Route>
-          <Route exact path="/exam/folder/participant">
+          <Route exact path="/exam/class/participant">
               
           </Route>
-          <Route exact path="/exam/folder/result">
+          <Route exact path="/exam/class/result">
               
           </Route>
         </div>
@@ -30,4 +30,4 @@ const ExamFolder = () => {
   );
 };
 
-export default ExamFolder;
+export default Class;

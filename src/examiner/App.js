@@ -7,9 +7,18 @@ import Student from "./pages/Student";
 
 // import { NavItems } from "./NavItems";
 import {BrowserRouter, Switch, Route } from "react-router-dom";
-import ExamFolder from "./pages/ExamFolder";
+import Class from "./pages/Class";
 
 function App() {
+  // eslint-disable-next-line no-unused-vars
+  const [data, setData] = React.useState(null);
+
+  React.useEffect(() => {
+    fetch("/api")
+      .then((res) => res.json())
+      .then((data) => setData(data.message));
+  }, []);
+
   return (
     <>  
       <BrowserRouter>
@@ -25,10 +34,11 @@ function App() {
           <Route exact path="/student" component="Student">
             <Student />
           </Route>
-          <Route path="/exam/folder" component="ExamFolder">
-            <ExamFolder/>
+          <Route path="/exam/class" component="ExamFolder">
+            <Class/>
           </Route>
         </Switch>
+        
       </BrowserRouter>
     </>
   );
