@@ -7,6 +7,7 @@ import Student from "./pages/Student";
 
 // import { NavItems } from "./NavItems";
 import {BrowserRouter, Switch, Route } from "react-router-dom";
+import ExamFolder from "./pages/ExamFolder";
 
 function App() {
   return (
@@ -23,6 +24,9 @@ function App() {
           </Route>
           <Route exact path="/student" component="Student">
             <Student />
+          </Route>
+          <Route path="/exam/folder" component="ExamFolder">
+            <ExamFolder/>
           </Route>
         </Switch>
       </BrowserRouter>
