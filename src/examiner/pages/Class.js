@@ -8,7 +8,7 @@ import Result from "../components/class_result";
 
 const Class = ({tabName}) => {
   return (
-    <div className="w-9/12 h-screen px-10 pb-10">
+    <div className="w-9/12 h-screen px-10 pb-10 overflow-auto">
       <div className="flex items-center h-1/6">
         <div className="text-3xl text-rmit-blue">
           Exam Manager | Class
