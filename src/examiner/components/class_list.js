@@ -35,21 +35,30 @@ const List = () => {
   );
 
   return (
-    <div className = "px-20 py-10 grid grid-cols-6 gap-20">
-      {examList.map(
-        (item, index)=>{
-          return(
-            <Link to={item.path} key={index} className="flex flex-col items-center text-rmit-blue">
-              <div className="text-6xl">
-                <AiFillFileText />
-              </div>
-              <div className=" ">
-                {item.title}
-              </div>
-            </Link>
-          );
-        }
-      )}
+    <div>
+      <div className="flex justify-end w-full">
+        <div className="inline-block px-5 py-1 text-white cursor-pointer rounded-md bg-rmit-red">
+            Create new exam
+        </div>
+      </div>
+
+
+      <div className = "px-20 py-10 grid grid-cols-6 gap-20">
+        {examList.map(
+          (item, index)=>{
+            return(
+              <Link to={item.path} key={index} className="flex flex-col items-center text-rmit-blue">
+                <div className="text-6xl">
+                  <AiFillFileText />
+                </div>
+                <div className=" ">
+                  {item.title}
+                </div>
+              </Link>
+            );
+          }
+        )}
+      </div>
     </div>
   );
 };
