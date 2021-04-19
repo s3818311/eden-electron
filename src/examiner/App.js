@@ -17,7 +17,7 @@ function App() {
         <Sidebar/>
 
         <Switch>
-          <Route exact path="/" component="Dashboard">
+          <Route exact path="/dashboard" component="Dashboard">
             <Dashboard/>
           </Route>
           <Route path="/exam/class/:tab(list|participant|result)" render={({match})=> <Class tabName = {match.params.tab} />}>

@@ -9,6 +9,7 @@
     "postcss:examiner": "npx postcss src/examiner/App.css -o src/examiner/tailwind.css",
     "postcss:examinee": "npx postcss src/examinee/App.css -o src/examinee/tailwind.css"
   },
+  "homepage": "/dashboard",
   "eslintConfig": {
     "extends": [
       "react-app",
