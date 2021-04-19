@@ -2,6 +2,8 @@ import React from "react";
 import NavTab from "../components/navtab";
 import PropTypes from "prop-types";
 import List from "../components/class_list";
+import Participants from "../components/class_participant";
+import Result from "../components/class_result";
 
 
 const Class = ({tabName}) => {
@@ -19,10 +21,10 @@ const Class = ({tabName}) => {
             tabName === "list" && <List />
           }
           {
-            tabName === "participant" && <div>This is participant tab</div>
+            tabName === "participant" && <Participants />
           }
           {
-            tabName === "result" && <div>This is result tab</div>
+            tabName === "result" && <Result />
           }
         </div>
       </div>
