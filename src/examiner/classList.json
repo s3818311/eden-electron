@@ -1,0 +1,56 @@
+[
+    {
+        "name": "Class 1",
+        "examList": [],
+        "participants": "studentList1.csv",
+        "results": {
+            "available": false,
+            "fileName": "result"
+        }
+    },
+    {
+        "name": "Class 2",
+        "examList": [],
+        "participants": "studentList2.csv",
+        "results": {
+            "available": false,
+            "fileName": "result"
+        }
+    },
+    {
+        "name": "Class 3",
+        "examList": [],
+        "participants": "studentList3.csv",
+        "results": {
+            "available": false,
+            "fileName": "result"
+        }
+    },
+    {
+        "name": "Class 4",
+        "examList": [],
+        "participants": "studentList4.csv",
+        "results": {
+            "available": false,
+            "fileName": "result"
+        }
+    },
+    {
+        "name": "Class 5",
+        "examList": [],
+        "participants": "studentList5.csv",
+        "results": {
+            "available": false,
+            "fileName": "result"
+        }
+    },
+    {
+        "name": "Class 6",
+        "examList": [],
+        "participants": "studentList6.csv",
+        "results": {
+            "available": false,
+            "fileName": "result"
+        }
+    }
+]
