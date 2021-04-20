@@ -10,6 +10,7 @@
     "postcss:examinee": "npx postcss src/examinee/App.css -o src/examinee/tailwind.css"
   },
   "homepage": "/dashboard",
+  "proxy": "http://localhost:3001",
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -33,9 +34,11 @@
     "@testing-library/jest-dom": "^5.11.10",
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.8.3",
+    "express": "^4.17.1",
     "postcss-cli": "^7.1.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-fetch-hook": "^1.8.5",
     "react-icons": "^4.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
@@ -44,10 +47,13 @@
   "devDependencies": {
     "@tailwindcss/postcss7-compat": "^2.0.4",
     "autoprefixer": "^9.8.6",
+    "cors": "^2.8.5",
     "eslint": "^7.23.0",
     "eslint-plugin-react": "^7.23.1",
     "eslint-plugin-tailwind": "^0.2.1",
+    "nodemon": "^2.0.7",
     "postcss": "^7.0.35",
+    "react-hook-form": "^7.2.1",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.4"
   }
 }
