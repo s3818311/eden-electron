@@ -30,7 +30,7 @@ const Sidebar = () => {
 
   return (
     <>
-      <div className={`flex flex-col h-screen bg-rmit-blue transition-all ${isOpen ? "w-3/12" : "w-16"}`}>
+      <div className={`flex flex-col h-screen bg-rmit-blue transition-all flex-shrink-0 ${isOpen ? "w-3/12" : "w-16"}`}>
         {
           NavItems.map((item, index) => {
           // Mapping each item in nav item to li
@@ -49,7 +49,6 @@ const Sidebar = () => {
             );
           })
         }
-
 
         <div className="w-full h-10 mt-auto cursor-pointer hover:bg-nav-hover" onClick={showSideBar}>
           <div className="flex items-center justify-center h-full text-white">
