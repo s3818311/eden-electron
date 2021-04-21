@@ -10,4 +10,13 @@ const updateFile = (fileName, data) => {
     .catch(err => err);
 };
 
-export default updateFile;
+const postFile = (fileData) => {
+  return fetch("http://localhost:3001/upload", {
+    method: "POST",
+    body: fileData,
+  })
+    .then(res => res)
+    .catch(err => err);
+};
+
+export { updateFile, postFile };
