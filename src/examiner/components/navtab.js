@@ -24,7 +24,7 @@ const NavTab = () => {
     <div className="flex h-13">
       {
         TabItems.map((item, index)=>{
-          return(
+          return (
             <NavLink
               exact
               key={index}

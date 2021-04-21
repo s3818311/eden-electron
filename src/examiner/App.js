@@ -17,17 +17,13 @@ function App() {
         <Sidebar/>
 
         <Switch>
-          <Route exact path="/dashboard" component="Dashboard">
-            <Dashboard/>
-          </Route>
-          <Route path="/exam/class/:tab(list|participant|result)" render={({match})=> <Class tabName = {match.params.tab} />}>
-          </Route>
-          <Route exact path="/exam" component="Exam">
-            <Exam />
-          </Route>
-          <Route exact path="/student" component="Student">
-            <Student />
-          </Route>
+          <Route exact path="/dashboard" render={() => <Dashboard />} />
+
+          <Route path="/exam/:class/:tab(list|participant|result)" render={({match}) => <Class tabName={match.params.tab} className={match.params.class} />} />
+
+          <Route exact path="/exam" render={() => <Exam />} />
+
+          <Route exact path="/student" render={() => <Student />} />
         </Switch>
 
       </BrowserRouter>
