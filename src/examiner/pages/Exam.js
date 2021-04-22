@@ -3,7 +3,7 @@ import PopUp from "../components/popUp";
 import ClassObj from "../components/class_obj";
 import useFetch from "react-fetch-hook";
 import Loading from "../components/loading";
-import updateFile from "../processes/updateFile";
+import {updateFile} from "../processes/fileHandling";
 
 const Exam = () => {
   const getClassList = useFetch("http://localhost:3001/file/classList.json", {
