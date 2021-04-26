@@ -19,7 +19,7 @@ function App() {
         <Switch>
           <Route exact path="/dashboard" render={() => <Dashboard />} />
 
-          <Route path="/exam/:class/:tab(list|participant|result)" render={({match}) => <Class tabName={match.params.tab} className={match.params.class} />} />
+          <Route path="/exam/:class/:tab(list|participant|result)" render={({match}) => <Class tabName={match.params.tab} class={match.params.class} />} />
 
           <Route exact path="/exam" render={() => <Exam />} />
 

@@ -6,25 +6,25 @@ import Participants from "../components/class_participant";
 import Result from "../components/class_result";
 
 
-const Class = ({tabName}) => {
+const Class = (props) => {
   return (
     <div className="flex flex-col w-9/12 h-screen px-10 pb-10">
       <div className="flex items-center h-1/6">
         <div className="text-3xl text-rmit-blue">
-          Exam Manager | Class
+          Exam Manager | {props.class}
         </div>
       </div>
-      <NavTab/>
+      <NavTab />
       <div className="flex-grow pt-2 overflow-y-scroll">
         <div className="flex flex-row flex-wrap">
           {
-            tabName === "list" && <List />
+            props.tabName === "list" && <List />
           }
           {
-            tabName === "participant" && <Participants />
+            props.tabName === "participant" && <Participants />
           }
           {
-            tabName === "result" && <Result />
+            props.tabName === "result" && <Result />
           }
         </div>
       </div>
@@ -33,7 +33,8 @@ const Class = ({tabName}) => {
 };
 
 Class.propTypes = {
-  tabName : PropTypes.string
+  tabName : PropTypes.string.isRequired,
+  class : PropTypes.string.isRequired,
 };
 
 export default Class;
