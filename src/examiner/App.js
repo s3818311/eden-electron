@@ -4,6 +4,8 @@ import Sidebar from "./components/sidebar";
 import Exam from "./pages/Exam";
 import Dashboard from "./pages/Dashboard";
 import Student from "./pages/Student";
+import WaitingScreen from "./pages/WatingScreen";
+
 
 // import { NavItems } from "./NavItems";
 import {BrowserRouter, Switch, Route } from "react-router-dom";
@@ -14,16 +16,35 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <Sidebar/>
 
         <Switch>
-          <Route exact path="/dashboard" render={() => <Dashboard />} />
+          <Route exact path="/dashboard" render={() => (
+            <>
+              <Sidebar />
+              <Dashboard />
+            </>)} />
 
-          <Route path="/exam/:class/:tab(list|participant|result)" render={({match}) => <Class tabName={match.params.tab} class={match.params.class} />} />
+          <Route path="/exam/:class/:tab(list|participant|result)" render={({match}) => (
+            <>
+              <Sidebar />
+              <Class tabName={match.params.tab} className={match.params.class} />
+            </>
+          )} />
 
-          <Route exact path="/exam" render={() => <Exam />} />
+          <Route exact path="/exam" render={() => (
+            <>
+              <Sidebar />
+              <Exam />
+            </>
+          )} />
 
-          <Route exact path="/student" render={() => <Student />} />
+          <Route exact path="/student" render={() => (
+            <>
+              <Sidebar />
+              <Student />
+            </>)} />
+
+          <Route exact path="/test" render={() => <WaitingScreen />} />
         </Switch>
 
       </BrowserRouter>
