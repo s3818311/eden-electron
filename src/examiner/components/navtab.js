@@ -1,22 +1,24 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import PropTypes from "prop-types";
+
 
 //Component for class tabs in exam manager
 
-const NavTab = () => {
+const NavTab = (props) => {
 
   const TabItems = [
     {
       "title": "Exam list",
-      "path": "/exam/class/list"
+      "path": "/exam/"+ props.class +"/list"
     },
     {
       "title": "Participants",
-      "path":"/exam/class/participant"
+      "path":"/exam/" + props.class +"/participant"
     },
     {
       "title": "Results",
-      "path":"/exam/class/result"
+      "path":"/exam/" + props.class + "/result"
     }
   ];
 
@@ -41,6 +43,11 @@ const NavTab = () => {
       </div>
     </div>
   );
+};
+
+
+NavTab.propTypes = {
+  class : PropTypes.string.isRequired,
 };
 
 export default NavTab;

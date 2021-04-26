@@ -11,10 +11,10 @@ const Class = (props) => {
     <div className="flex flex-col w-9/12 h-screen px-10 pb-10">
       <div className="flex items-center h-1/6">
         <div className="text-3xl text-rmit-blue">
-          Exam Manager | {props.class}
+          Exam Manager | {props.className}
         </div>
       </div>
-      <NavTab />
+      <NavTab class={props.className} />
       <div className="flex-grow pt-2 overflow-y-scroll">
         <div className="flex flex-row flex-wrap">
           {
@@ -34,7 +34,7 @@ const Class = (props) => {
 
 Class.propTypes = {
   tabName : PropTypes.string.isRequired,
-  class : PropTypes.string.isRequired,
+  className : PropTypes.string.isRequired,
 };
 
 export default Class;
