@@ -1,7 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import "../pages/InstructionPage";
-import "../pages/PersonalInfoPage";
 
 function Text(props) {
   return (
