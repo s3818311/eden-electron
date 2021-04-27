@@ -1,44 +1,15 @@
-/* eslint-disable no-prototype-builtins */
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+import { useForm } from "react-hook-form";
 
-const LoginFormComponent = () => {
-  const [credentials, setCredentials] = useState({
-    username: "",
-  });
-  const [errors, setErrors] = useState({});
-
-  // eslint-disable-next-line no-unused-vars
-  const handleLoginForm = (evt) => {
-    evt.preventDefault();
-
-    // eslint-disable-next-line no-unused-vars
-    setErrors((errors) => ({ ...validateCredentials(credentials) }));
-  };
-
-  const validateCredentials = (credentials) => {
-    let errors = {};
-
-    if (credentials.username === "") {
-      errors = Object.assign(errors, {
-        username: "This field is required",
-      });
-    }
-    return errors;
-  };
-
-  const handleInputChange = (evt) => {
-    evt.persist();
-    setCredentials((credentials) => ({
-      ...credentials,
-      [evt.target.name]: evt.target.value,
-    }));
-  };
+const LoginFormComponent = (props) => {
+  const { register, handleSubmit } = useForm();
 
   return (
     <form
       className="w-full h-1/3 grid gap-y-8"
-      onSubmit={handleLoginForm.bind(this)}
+      onSubmit={handleSubmit(props.loginFunc)}
     >
       <div className="h-20 px-60 ">
         <div className="bg-rmit-blue w-full h-full flex items-center">
@@ -56,21 +27,14 @@ const LoginFormComponent = () => {
         </label>
         <input
           id="username"
-          className={
-            "border mb-2 py-2 px-3 rounded text-gray-700 w-full focus:bg-primary text-2xl" +
-            (errors.hasOwnProperty("username") ? "border-red-500" : "")
-          }
+          className="border mb-2 py-2 px-3 rounded text-gray-700 w-full focus:bg-primary text-2xl"
           name="username"
           type="tel"
           pattern="[0-9]{7}"
           placeholder="eg.3822042"
-          value={credentials.username}
-          onChange={handleInputChange.bind(this)}
           required
+          {...register("className")}
         />
-        {errors.hasOwnProperty("username") && (
-          <div className="text-red-500 text-xs italic">{errors.username}</div>
-        )}
       </div>
 
       <div className=" px-96 w-full">
@@ -85,6 +49,10 @@ const LoginFormComponent = () => {
       </div>
     </form>
   );
+};
+
+LoginFormComponent.propTypes = {
+  loginFunc: PropTypes.func.isRequired,
 };
 
 export default LoginFormComponent;
