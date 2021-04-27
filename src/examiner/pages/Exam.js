@@ -1,35 +1,44 @@
 import React, { useState } from "react";
 import PopUp from "../components/popUp";
-import ClassObj from "../components/class_obj";
-import useFetch from "react-fetch-hook";
+import ClassObj from "../components/class_tile";
 import Loading from "../components/loading";
-import {updateFile} from "../processes/fileHandling";
+import useFetch from "react-fetch-hook";
 
 const Exam = () => {
-  const getClassList = useFetch("http://localhost:3001/file/classList.json", {
-    formatter: (response) => response.text(),
-  });
-
   const modalAdd = (formData) => {
-    const newClass = {
-      name: formData.className,
-      examList: [],
-      participants: null,
-      results: {
-        available: false,
-        fileName: null
-      }
-    };
+    fetch("http://localhost:3001/update/classList.json", {
+      method: "PATCH",
+      body: JSON.stringify({
+        name: formData.className,
+        examList: [],
+        participants: null,
+        results: {
+          available: false,
+          fileName: null
+        }
+      }),
+      headers: {
+        "Content-Type": "application/json"
+      },
+    }).then(() => {
+      window.location.reload();
+    });
 
-    updateFile("classList.json", JSON.stringify(newClass));
-    window.location.reload();
+  };
+
+  const deleteClass = (formData) => {
+    fetch("http://localhost:3001/delete/class/" + formData.class, {
+      method: "DELETE"
+    });
   };
 
   const renderClasses = () => {
-    return getClassList.isLoading
+    const { isLoading, data } = useFetch("http://localhost:3001/file/classList.json");
+
+    return isLoading
       ? <Loading></Loading>
-      : JSON.parse(getClassList.data).map((classObj, index) => (
-        <ClassObj name={classObj.name} loading={getClassList.isLoading} key={index}></ClassObj>
+      : data.map((classObj, index) => (
+        <ClassObj name={classObj.name} key={index} deleteFunc={deleteClass}></ClassObj>
       ));
   };
 
@@ -38,10 +47,11 @@ const Exam = () => {
   const toggleModal = () => setModalState(!modalIsOpen);
 
   const renderModal = () => {
-    if (modalIsOpen)
+    if (modalIsOpen) {
       return (
-        <PopUp text="Add new class" closePopup={toggleModal} addFunc={modalAdd}></PopUp>
+        <PopUp text="Add new class" closePopup={toggleModal} onSubmitFunc={modalAdd}></PopUp>
       );
+    }
   };
 
   return (
@@ -52,7 +62,7 @@ const Exam = () => {
         </div>
       </div>
       <div className="pt-2 h-5/6">
-        <div className="flex justify-end w-full">
+        <div className="flex justify-end w-full shadow-2xl">
           <div className="inline-block px-5 py-1 text-white cursor-pointer rounded-md bg-rmit-red" onClick={toggleModal}>
             Add new class
           </div>
