@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
-const BottomButton = (props) => {
+function BottomButton(props) {
   return (
     <div className="w-full flex px-20">
       <div className="w-full flex mt-auto mb-20">
@@ -29,7 +29,7 @@ const BottomButton = (props) => {
       </div>
     </div>
   );
-};
+}
 
 BottomButton.propTypes = {
   prevButton: PropTypes.func.isRequired,

@@ -1,6 +1,6 @@
 import React from "react";
 
-const InfoForm = () => {
+function InfoForm() {
   return (
     <div className="px-10 pb-10">
       <div className="border-2 border-black mx-auto p-6 bg-white rounded-lg">
@@ -28,6 +28,6 @@ const InfoForm = () => {
       </div>
     </div>
   );
-};
+}
 
 export default InfoForm;

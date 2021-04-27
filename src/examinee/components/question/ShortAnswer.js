@@ -1,6 +1,6 @@
 import React from "react";
 
-const ShortAnswer = () => {
+function ShortAnswer() {
   return (
     <div className="px-10 pb-10">
       <div className="border-2 border-black mx-auto flex p-6 bg-white rounded-lg flex-wrap content-start">
@@ -19,6 +19,6 @@ const ShortAnswer = () => {
       </div>
     </div>
   );
-};
+}
 
 export default ShortAnswer;

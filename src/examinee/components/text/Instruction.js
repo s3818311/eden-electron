@@ -1,6 +1,6 @@
 import React from "react";
 
-const Instruction = () => {
+function Instruction() {
   return (
     <ol className="list-decimal text-justify text-2xl">
       <li>
@@ -21,5 +21,5 @@ const Instruction = () => {
       </li>
     </ol>
   );
-};
+}
 export default Instruction;

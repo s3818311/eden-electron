@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import MultipleChoice from "../question/MultipleChoice";
 import ShortAnswer from "../question/ShortAnswer";
+import BottomButton from "../button/BottomButton";
 import { FaBars } from "react-icons/fa";
 
 const Text = () => {
@@ -18,22 +19,6 @@ const Text = () => {
   );
 };
 
-const Button = () => {
-  return (
-    <div className="w-full flex px-10 pb-10">
-      <div className="w-full flex mt-auto mb-20">
-        <div className="w-full flex justify-end">
-          <button
-            type="submit"
-            className="bg-rmit-red hover:bg-rmit-red-bold text-white font-bold focus:border-none px-4 py-2 rounded"
-          >
-            Submit
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-};
 const Message = () => {
   return (
     <div className="bottom-20 right-20 h-32 w-32 bg-white fixed">
@@ -68,13 +53,20 @@ class Announcement extends React.Component {
     );
   }
 }
+
 const QuestionPage = () => {
+  const [isHidden] = useState(true);
+
   return (
     <div className="w-full h-screen">
       <Text />
       <MultipleChoice />
       <ShortAnswer />
-      <Button />
+      <BottomButton
+        className={isHidden ? "" : "hidden"}
+        prevButton={isHidden}
+        nextButton="Submit"
+      />
       <Announcement />
     </div>
   );
