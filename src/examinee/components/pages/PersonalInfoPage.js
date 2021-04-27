@@ -1,17 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
-const Text = () => {
-  return (
-    <div className="flex-grow h-1/4 px-10 pb-10">
-      <div className="flex items-center border-b-2 pt-10 pb-10 border-rmit-red">
-        <div className="text-3xl text-rmit-blue">
-          Personal Information Confirmation
-        </div>
-      </div>
-    </div>
-  );
-};
+import Text from "../text/Text";
 
 const Form = () => {
   return (
@@ -22,17 +11,20 @@ const Form = () => {
             Examinee Personal Information
           </div>
         </div>
-        <div className="flex items-center justify-center">
-          <div className="w-2/3 ">
+        <div className="flex">
+          <div className="w-1/3 flex items-center justify-center">
             <img
-              className="rounded-lg h-24 w-24 m-auto block align-middle"
+              className="rounded-lg w-1/2 h-1/2 block mx-auto "
               src="https://i.imgur.com/wnuKAT5.jpg"
               alt="examinee-image"
             ></img>
           </div>
-          <div className="w-1/3 text-center">
-            <div>Vo Thanh Luan</div>
-            <div>13/12/2001</div>
+
+          <div className="w-2/3 flex items-center justify-center">
+            <div className="mx-auto">
+              <div>Name: Vo Thanh Luan</div>
+              <div>Date of Birth: 13/12/2001</div>
+            </div>
           </div>
         </div>
       </div>
@@ -55,12 +47,12 @@ const Button = () => {
           </Link>
         </div>
         <div className="w-1/2 flex justify-end">
-          <Link to="/question">
+          <Link to="/instruction">
             <button
               type="submit"
               className="bg-rmit-red hover:bg-rmit-red-bold text-white font-bold focus:border-none px-4 py-2 rounded"
             >
-            Next
+              Next
             </button>
           </Link>
         </div>
@@ -71,8 +63,8 @@ const Button = () => {
 
 const InfoPageComponent = () => {
   return (
-    <div className="w-full h-full ">
-      <Text />
+    <div className="w-full h-full">
+      <Text title="Personal Information Confirmation" />
       <Form />
       <Button />
     </div>
