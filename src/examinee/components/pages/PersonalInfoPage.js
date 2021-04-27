@@ -1,8 +1,7 @@
 import React from "react";
 import BottomButton from "../button/BottomButton";
-import Text from "../text/Title";
 import InfoForm from "../forms/InfoForm";
-
+import Text from "../text/Title";
 const InfoPageComponent = () => {
   return (
     <div className="w-full h-full">

@@ -5,14 +5,17 @@ import Spinner from "../button/Spinner";
 
 const InstructionPage = () => {
   return (
-    <div className="w-full flex flex-wrap justify-center items-center p-36">
+    <div className="w-full flex flex-wrap px-10">
       <Text title="Instruction" />
-      <div className="w-1/2">
-        <Instruction />
-      </div>
-      <div className="w-1/2 flex justify-center ">
-        <Spinner />
-      </div>
+      <di className="w-full flex flex-wrap justify-center items-center">
+        <div className="w-1/2 px-10">
+          <Instruction />
+        </div>
+
+        <div className="w-1/2 flex justify-center ">
+          <Spinner />
+        </div>
+      </di>
     </div>
   );
 };
