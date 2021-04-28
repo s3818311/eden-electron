@@ -15,7 +15,7 @@ const Class = (props) => {
         </div>
       </div>
       <NavTab class={props.className} />
-      <div className="flex-grow pt-2 overflow-y-scroll">
+      <div className="flex-grow pt-2 overflow-y-scroll h-60">
         <div className="flex flex-row flex-wrap">
           {
             props.tabName === "list" && <List />
