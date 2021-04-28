@@ -9,16 +9,16 @@ const NavTab = (props) => {
 
   const TabItems = [
     {
-      "title": "Exam list",
-      "path": "/exam/"+ props.class +"/list"
+      "title": "Start exam",
+      "path": "/class/"+ props.class +"/start"
     },
     {
       "title": "Participants",
-      "path":"/exam/" + props.class +"/participant"
+      "path":"/class/" + props.class +"/participant"
     },
     {
       "title": "Results",
-      "path":"/exam/" + props.class + "/result"
+      "path":"/class/" + props.class + "/result"
     }
   ];
 

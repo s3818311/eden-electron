@@ -16,14 +16,14 @@ const Sidebar = () => {
       icon: <AiOutlineDashboard size={isOpen ? 30 : 35} className="transition-all"/>
     },
     {
-      title: "Exam Manager",
-      path: "/exam",
+      title: "Class Manager",
+      path: "/class",
       icon: <AiOutlineTable size={isOpen ? 30 : 35} className="transition-all"/>
 
     },
     {
-      title: "Student Manager",
-      path: "/student",
+      title: "Exam Manager",
+      path: "/exam",
       icon: <AiFillBook size={isOpen ? 30 : 35} className="transition-all"/>,
     },
   ];
