@@ -1,9 +1,9 @@
 import React from "react";
 import "tailwindcss/tailwind.css";
 import Sidebar from "./components/sidebar";
-import Exam from "./pages/Exam";
+import ClassManager from "./pages/ClassManager";
 import Dashboard from "./pages/Dashboard";
-import Student from "./pages/Student";
+import ExamManager from "./pages/ExamManager";
 import WaitingScreen from "./pages/WatingScreen";
 
 
@@ -24,24 +24,24 @@ function App() {
               <Dashboard />
             </>)} />
 
-          <Route path="/exam/:class/:tab(list|participant|result)" render={({match}) => (
+          <Route path="/class/:class/:tab(start|participant|result)" render={({match}) => (
             <>
               <Sidebar />
               <Class tabName={match.params.tab} className={match.params.class} />
             </>
           )} />
 
-          <Route exact path="/exam" render={() => (
+          <Route exact path="/class" render={() => (
             <>
               <Sidebar />
-              <Exam />
+              <ClassManager />
             </>
           )} />
 
-          <Route exact path="/student" render={() => (
+          <Route exact path="/exam" render={() => (
             <>
               <Sidebar />
-              <Student />
+              <ExamManager />
             </>)} />
 
           <Route exact path="/test" render={() => <WaitingScreen />} />

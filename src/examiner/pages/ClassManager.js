@@ -4,7 +4,7 @@ import ClassObj from "../components/class_tile";
 import Loading from "../components/loading";
 import useFetch from "react-fetch-hook";
 
-const Exam = () => {
+const ClassManager = () => {
   const modalAdd = (formData) => {
     fetch("http://localhost:3001/update/classList.json", {
       method: "PATCH",
@@ -58,7 +58,7 @@ const Exam = () => {
     <div className="flex-grow h-screen px-10 pb-10">
       <div className="flex items-center border-b-2 h-1/6 border-rmit-red">
         <div className="text-3xl text-rmit-blue">
-          Exam Manager
+          Class Manager
         </div>
       </div>
       <div className="pt-2 h-5/6">
@@ -79,4 +79,4 @@ const Exam = () => {
   );
 };
 
-export default Exam;
+export default ClassManager;
