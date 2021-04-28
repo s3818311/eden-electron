@@ -20,7 +20,7 @@ const LoginFormComponent = () => {
       onSubmit={handleSubmit(onSubmit)}
     >
       <div className="h-20 px-60 ">
-        <div className="bg-rmit-blue w-full h-full flex items-center">
+        <div className="bg-rmit-blue w-full h-full flex items-center rounded-sm">
           <div className=" text-center mx-auto text-2xl text-white">
             Title of Examination
           </div>
