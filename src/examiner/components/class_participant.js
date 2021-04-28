@@ -54,7 +54,7 @@ const Participants = () => {
 
 
   return (
-    <div>
+    <div className="w-full">
       <div className="flex justify-end w-full">
         <div className="inline-block px-5 py-1 text-white cursor-pointer rounded-md bg-rmit-red" onClick={toggleModal}>
             Update participants

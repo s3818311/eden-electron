@@ -50,7 +50,7 @@ const Result = () => {
 
   return (
 
-    <div className="overflow-auto">
+    <div className="w-full overflow-auto">
       <div className="flex justify-end w-full">
         <div className="inline-block px-5 py-1 text-white cursor-pointer rounded-md bg-rmit-red">
             Download Result

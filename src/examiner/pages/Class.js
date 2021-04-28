@@ -1,7 +1,7 @@
 import React from "react";
 import NavTab from "../components/navtab";
 import PropTypes from "prop-types";
-import List from "../components/class_list";
+import StartExam from "../components/class_startexam";
 import Participants from "../components/class_participant";
 import Result from "../components/class_result";
 
@@ -18,7 +18,7 @@ const Class = (props) => {
       <div className="flex-grow pt-2 overflow-y-scroll h-60">
         <div className="flex flex-row flex-wrap">
           {
-            props.tabName === "list" && <List />
+            props.tabName === "start" && <StartExam />
           }
           {
             props.tabName === "participant" && <Participants />
