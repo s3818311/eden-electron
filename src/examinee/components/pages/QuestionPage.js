@@ -3,6 +3,7 @@ import MultipleChoice from "../question/MultipleChoice";
 import ShortAnswer from "../question/ShortAnswer";
 import BottomButton from "../button/BottomButton";
 import Announcement from "../announcement/Announcement";
+import ProgressBar from "../progress/ProgressBar";
 import Title from "../text/Title";
 
 const QuestionPage = () => {
@@ -11,7 +12,8 @@ const QuestionPage = () => {
       <Title title="Title of Examination" subTitle="Examinee Info" />
       <MultipleChoice />
       <ShortAnswer />
-      <BottomButton nextButton="Submit" isPrevButton={true} />
+      <ProgressBar />
+      <BottomButton nextButton="Next" isPrevButton={true} />
       <Announcement />
     </div>
   );
