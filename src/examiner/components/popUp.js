@@ -10,7 +10,7 @@ const PopUp = (props) => {
   return (
     <div className="fixed top-0 left-0 w-full h-screen bg-black bg-opacity-25">
       <div className="relative w-1/3 h-auto m-auto overflow-auto bg-white rounded-lg top-1/4">
-        <form onSubmit={handleSubmit(props.addFunc)}>
+        <form onSubmit={handleSubmit(props.onSubmitFunc)}>
           <div className="p-5 grid gap-y-5 gap-x-7 grid-cols-2">
             <div className="text-lg text-center col-span-2">{props.text}</div>
             <div className="flex flex-row col-span-2">
@@ -37,7 +37,7 @@ const PopUp = (props) => {
 PopUp.propTypes = {
   text : PropTypes.string.isRequired,
   closePopup : PropTypes.func.isRequired,
-  addFunc: PropTypes.func.isRequired
+  onSubmitFunc: PropTypes.func.isRequired
 };
 
 export default PopUp;
