@@ -19,7 +19,7 @@ const NewStudentPopup = (props) => {
       : JSON.parse(getStudentFileList.data).map((item, index) => {
         return (
           <div key={index} className={`flex flex-col items-center cursor-pointer text-rmit-blue ${currentFile===item.filename && "bg-rmit-blue bg-opacity-10"}`}
-            onClick={()=>setFile(item.filename)}>
+            onClick={()=>{setFile(item.filename);}}>
             <div className="text-5xl">
               <AiFillFileText />
             </div>
@@ -34,7 +34,7 @@ const NewStudentPopup = (props) => {
   return (
     <div className="fixed top-0 left-0 w-full h-screen bg-black bg-opacity-25">
       <div className="relative w-1/3 h-auto m-auto overflow-auto bg-white rounded-lg top-1/4">
-        <form>
+        <div>
           <div className="p-5 grid gap-y-5 gap-x-7 grid-cols-2">
             <div className="text-lg text-center col-span-2">{props.text}</div>
             <div className="grid grid-cols-3 col-span-2">
@@ -43,11 +43,11 @@ const NewStudentPopup = (props) => {
             <button onClick={props.closePopup} className="inline-block px-5 py-1 text-center text-white bg-red-500 cursor-pointer rounded-md">
               Close
             </button>
-            <button className="inline-block px-5 py-1 text-center text-white bg-green-500 cursor-pointer rounded-md" type="submit">
+            <button className="inline-block px-5 py-1 text-center text-white bg-green-500 cursor-pointer rounded-md" onClick={()=>{props.closePopup(); props.updateFile(currentFile);}}>
               Update
             </button>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   );
@@ -56,7 +56,8 @@ const NewStudentPopup = (props) => {
 NewStudentPopup.propTypes = {
   text: PropTypes.string.isRequired,
   closePopup: PropTypes.func.isRequired,
-  currentFile: PropTypes.string.isRequired
+  currentFile: PropTypes.string.isRequired,
+  updateFile: PropTypes.func.isRequired,
 };
 
 export default NewStudentPopup;

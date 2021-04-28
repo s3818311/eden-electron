@@ -5,7 +5,9 @@ import Loading from "../components/loading";
 
 const Participants = () => {
 
-  const {isLoading, data} = useFetch("http://localhost:3001/file/student1.csv", {
+  const [currentFile, updateFile] = useState("student1.csv");
+
+  const {isLoading, data} = useFetch(`http://localhost:3001/file/${currentFile}`, {
     formatter: (response) => response.text(),
   });
 
@@ -46,7 +48,7 @@ const Participants = () => {
 
   const renderModal = () => {
     if(modalIsOpen){
-      return (<NewStudentPopup currentFile="student1.csv" text="Choose new student list" closePopup={toggleModal}/>);
+      return (<NewStudentPopup currentFile={currentFile} text="Choose new student list" closePopup={toggleModal} updateFile={updateFile}/>);
     }
   };
 
