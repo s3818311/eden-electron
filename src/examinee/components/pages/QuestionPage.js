@@ -11,7 +11,7 @@ const QuestionPage = () => {
       <Title title="Title of Examination" subTitle="Examinee Info" />
       <MultipleChoice />
       <ShortAnswer />
-      <BottomButton nextButton="Submit" isQuestion={true} />
+      <BottomButton nextButton="Submit" isPrevButton={true} />
       <Announcement />
     </div>
   );
