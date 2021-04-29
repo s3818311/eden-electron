@@ -2,7 +2,7 @@ import React from "react";
 import NavTab from "../components/navtab";
 import PropTypes from "prop-types";
 import StartExam from "../components/class_startexam";
-import Participants from "../components/class_participant";
+import Students from "../components/class_student";
 import Result from "../components/class_result";
 
 
@@ -11,7 +11,7 @@ const Class = (props) => {
     <div className="flex flex-col w-9/12 h-screen px-10 pb-10">
       <div className="flex items-center h-1/6">
         <div className="text-3xl text-rmit-blue">
-          Exam Manager | {props.className}
+          Class Manager | {props.className}
         </div>
       </div>
       <NavTab class={props.className} />
@@ -21,7 +21,7 @@ const Class = (props) => {
             props.tabName === "start" && <StartExam />
           }
           {
-            props.tabName === "participant" && <Participants />
+            props.tabName === "students" && <Students />
           }
           {
             props.tabName === "result" && <Result />

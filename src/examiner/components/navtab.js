@@ -13,8 +13,8 @@ const NavTab = (props) => {
       "path": "/class/"+ props.class +"/start"
     },
     {
-      "title": "Participants",
-      "path":"/class/" + props.class +"/participant"
+      "title": "Students",
+      "path":"/class/" + props.class +"/students"
     },
     {
       "title": "Results",
