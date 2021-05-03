@@ -24,7 +24,7 @@ function App() {
               <Dashboard />
             </>)} />
 
-          <Route path="/class/:class/:tab(start|students|result)" render={({match}) => (
+          <Route path="/class/:class/:tab(exam|students|result)" render={({match}) => (
             <>
               <Sidebar />
               <Class tabName={match.params.tab} className={match.params.class} />

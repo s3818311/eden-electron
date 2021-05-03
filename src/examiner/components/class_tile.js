@@ -19,7 +19,7 @@ const ClassObj = (props) => {
         </form>
         <NavLink
           exact
-          to={ "/class/" + props.name + "/start" }
+          to={ "/class/" + props.name + "/exam" }
           className="block w-full mt-auto text-lg text-center rounded-b-lg group-hover:bg-gray-400 transition-all"
         >
           {props.name}

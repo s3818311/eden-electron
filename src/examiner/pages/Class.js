@@ -9,24 +9,16 @@ import Result from "../components/class_result";
 const Class = (props) => {
   return (
     <div className="flex flex-col w-9/12 h-screen px-10 pb-10">
-      <div className="flex items-center h-1/6">
+      <div className="flex items-center flex-shrink-0 h-32">
         <div className="text-3xl text-rmit-blue">
           Class Manager | {props.className}
         </div>
       </div>
       <NavTab class={props.className} />
-      <div className="flex-grow pt-2 overflow-y-scroll h-60">
-        <div className="flex flex-row flex-wrap">
-          {
-            props.tabName === "start" && <StartExam />
-          }
-          {
-            props.tabName === "students" && <Students />
-          }
-          {
-            props.tabName === "result" && <Result />
-          }
-        </div>
+      <div className="flex flex-col flex-grow overflow-y-auto">
+        {props.tabName === "exam" && <StartExam />}
+        {props.tabName === "students" && <Students class={props.className} />}
+        {props.tabName === "result" && <Result />}
       </div>
     </div>
   );

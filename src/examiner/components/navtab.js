@@ -10,7 +10,7 @@ const NavTab = (props) => {
   const TabItems = [
     {
       "title": "Start exam",
-      "path": "/class/"+ props.class +"/start"
+      "path": "/class/"+ props.class +"/exam"
     },
     {
       "title": "Students",
@@ -23,7 +23,7 @@ const NavTab = (props) => {
   ];
 
   return (
-    <div className="flex h-13">
+    <div className="flex flex-shrink-0 h-13">
       {
         TabItems.map((item, index)=>{
           return (
