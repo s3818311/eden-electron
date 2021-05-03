@@ -48,6 +48,25 @@ app.patch("/update/:name", (req, res) => {
   });
 });
 
+app.patch("/update/class/:name/students/:studentFile", (req, res) => {
+  const filePath = path.join(publicPath, "classList.json");
+  const file = fs.readFileSync(filePath, "utf-8");
+  let fileData = JSON.parse(file);
+
+  for (const classObj of fileData) {
+    if (classObj.name === req.params.name){
+      classObj.participants = req.params.studentFile;
+    }
+  }
+
+  fs.writeFile(filePath, JSON.stringify(fileData), (err) => {
+    if (err) {
+      res.status(500).send("An error occurred. Student file not added");
+    }
+    res.status(200).send("Student file added");
+  });
+});
+
 app.delete("/delete/class/:name", (req, res) => {
   const className = req.params.name;
   const filePath = path.join(publicPath, "classList.json");
