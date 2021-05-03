@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import PopUp from "../components/popUp";
+import PopUp from "../components/addClassPopup";
 import ClassObj from "../components/class_tile";
 import Loading from "../components/loading";
 import useFetch from "react-fetch-hook";
@@ -36,7 +36,7 @@ const ClassManager = () => {
     const { isLoading, data } = useFetch("http://localhost:3001/file/classList.json");
 
     return isLoading
-      ? <Loading></Loading>
+      ? <Loading />
       : data.map((classObj, index) => (
         <ClassObj name={classObj.name} key={index} deleteFunc={deleteClass}></ClassObj>
       ));
@@ -62,13 +62,13 @@ const ClassManager = () => {
         </div>
       </div>
       <div className="pt-2 h-5/6">
-        <div className="flex justify-end w-full shadow-2xl">
+        <div className="flex justify-end w-full">
           <div className="inline-block px-5 py-1 text-white cursor-pointer rounded-md bg-rmit-red" onClick={toggleModal}>
             Add new class
           </div>
         </div>
 
-        <div className="flex flex-row flex-wrap content-start h-full overflow-y-scroll justify-items-center">
+        <div className="flex flex-row flex-wrap content-start justify-around h-full overflow-y-scroll">
           { renderClasses() }
         </div>
 
