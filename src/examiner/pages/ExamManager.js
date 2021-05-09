@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import {AiFillFileText} from "react-icons/ai";
 import { Link } from "react-router-dom";
+import ExamPopup from "../components/addExamPopup";
 
 const ExamManager = () => {
   // eslint-disable-next-line no-unused-vars
@@ -33,6 +34,18 @@ const ExamManager = () => {
     ]
   );
 
+  const [modalIsOpen, setModalState] = useState(false);
+
+  const toggleModal = () => setModalState(!modalIsOpen);
+
+  const renderModal = () => {
+    if (modalIsOpen) {
+      return (
+        <ExamPopup text="Add new exam" closePopup={toggleModal} onSubmitFunc={toggleModal}></ExamPopup>
+      );
+    }
+  };
+
 
   return (
     <div className="flex-grow h-screen px-10 pb-10">
@@ -44,11 +57,13 @@ const ExamManager = () => {
       <div className="pt-2 h-5/6">
         <div className="flex justify-end w-full">
           <div className="flex justify-end w-full">
-            <div className="inline-block px-5 py-1 text-white cursor-pointer rounded-md bg-rmit-red">
+            <div className="inline-block px-5 py-1 text-white cursor-pointer rounded-md bg-rmit-red" onClick={toggleModal}>
             Create new exam
             </div>
           </div>
         </div>
+
+        {renderModal()}
 
         <div className="flex flex-row flex-wrap">
           <div className = "px-20 py-10 grid grid-cols-6 gap-20">
