@@ -5,6 +5,7 @@ import ClassManager from "./pages/ClassManager";
 import Dashboard from "./pages/Dashboard";
 import ExamManager from "./pages/ExamManager";
 import WaitingScreen from "./pages/WatingScreen";
+import Exam from "./pages/Exam";
 
 
 // import { NavItems } from "./NavItems";
@@ -43,7 +44,11 @@ function App() {
               <Sidebar />
               <ExamManager />
             </>)} />
-
+          <Route exact path="/exam/:exam" render={({match}) => (
+            <>
+              <Sidebar />
+              <Exam examName={match.params.exam} />
+            </>)} />
           <Route exact path="/test" render={() => <WaitingScreen />} />
         </Switch>
 

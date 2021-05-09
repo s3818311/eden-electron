@@ -9,27 +9,27 @@ const ExamManager = () => {
     [
       {
         title: "Exam 1",
-        path: ""
+        path: "exam1"
       },
       {
         title: "Exam 2",
-        path: ""
+        path: "exam2"
       },
       {
         title: "Exam 3",
-        path: ""
+        path: "exam3"
       },
       {
         title: "Exam 4",
-        path: ""
+        path: "exam4"
       },
       {
         title: "Exam 5",
-        path: ""
+        path: "exam5"
       },
       {
         title: "Exam 6",
-        path: ""
+        path: "exam6"
       }
     ]
   );
@@ -70,7 +70,7 @@ const ExamManager = () => {
             {examList.map(
               (item, index)=>{
                 return(
-                  <Link to={item.path} key={index} className="flex flex-col items-center text-rmit-blue">
+                  <Link to={"exam/"+item.path} key={index} className="flex flex-col items-center text-rmit-blue">
                     <div className="text-6xl">
                       <AiFillFileText />
                     </div>
