@@ -28,9 +28,12 @@ const Exam = (props) => {
             </div>
           </div>
 
-          <div className="flex items-center h-20 py-2">
-            <div className="w-1/3 text-2xl text-left text-rmit-blue">
+          <div className="flex h-auto py-2">
+            <div className="text-2xl text-left text-rmit-blue">
             Instruction
+            </div>
+            <div className="flex-grow px-6">
+              <textarea className="flex-grow w-full px-3 py-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all" name="" id="" cols="30" rows="10"></textarea>
             </div>
           </div>
         </div>
