@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { AiFillCaretRight, AiFillCaretLeft, AiOutlineDashboard, AiOutlineTable, AiFillBook } from "react-icons/ai";
+import { AiFillCaretRight, AiFillCaretLeft, AiOutlineDashboard, AiOutlineTable, AiFillBook, AiOutlineTeam } from "react-icons/ai";
 import { NavLink } from "react-router-dom";
 
 const Sidebar = () => {
@@ -25,6 +25,11 @@ const Sidebar = () => {
       title: "Exam Manager",
       path: "/exam",
       icon: <AiFillBook size={isOpen ? 30 : 35} className="transition-all"/>,
+    },
+    {
+      title: "Student Manager",
+      path: "/students",
+      icon: <AiOutlineTeam size={isOpen ? 30 : 35} className="transition-all"/>,
     },
   ];
 

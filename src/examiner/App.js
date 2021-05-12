@@ -6,55 +6,70 @@ import Dashboard from "./pages/Dashboard";
 import ExamManager from "./pages/ExamManager";
 import WaitingScreen from "./pages/WatingScreen";
 import Exam from "./pages/Exam";
-
+import StudentManager from "./pages/StudentManager";
 
 // import { NavItems } from "./NavItems";
-import {BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Class from "./pages/Class";
 
-function App() {
-
+const App = () => {
   return (
     <>
       <BrowserRouter>
-
         <Switch>
+
           <Route exact path="/dashboard" render={() => (
             <>
               <Sidebar />
               <Dashboard />
-            </>)} />
+            </>
+          )}
+          />
 
-          <Route path="/class/:class/:tab(exam|students|result)" render={({match}) => (
+          <Route path="/class/:id/:tab(exam|students|result)" render={({ match }) => (
             <>
               <Sidebar />
-              <Class tabName={match.params.tab} className={match.params.class} />
+              <Class tabName={match.params.tab} classId={match.params.id} />
             </>
-          )} />
+          )}
+          />
 
           <Route exact path="/class" render={() => (
             <>
               <Sidebar />
               <ClassManager />
             </>
-          )} />
+          )}
+          />
 
           <Route exact path="/exam" render={() => (
             <>
               <Sidebar />
               <ExamManager />
-            </>)} />
-          <Route exact path="/exam/:exam" render={({match}) => (
+            </>)}
+          />
+
+          <Route exact path="/exam/:exam" render={({ match }) => (
             <>
               <Sidebar />
               <Exam examName={match.params.exam} />
-            </>)} />
-          <Route exact path="/test" render={() => <WaitingScreen />} />
-        </Switch>
+            </>)}
+          />
 
+          <Route exact path="/test" render={() => <WaitingScreen />} />
+
+          <Route exact path="/students" render={() =>(
+            <>
+              <Sidebar />
+              <StudentManager />
+            </>
+          )}
+          />
+
+        </Switch>
       </BrowserRouter>
     </>
   );
-}
+};
 
 export default App;
