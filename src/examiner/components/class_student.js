@@ -1,108 +1,107 @@
-/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import useFetch from "react-fetch-hook";
-import NewStudentPopup from "../components/newStudentPopup";
+import SelectStudent from "./select_student_popup";
 import Loading from "../components/loading";
 import PropTypes from "prop-types";
+import { AiFillDelete } from "react-icons/ai";
+import { useForm } from "react-hook-form";
 
 const Students = (props) => {
-  const classList = useFetch("http://localhost:3001/file/classList.json");
+  const studentList = useFetch("http://localhost:3001/studentInClass/" + props.classId);
+  const { register, handleSubmit } = useForm();
 
-  const getStudentList = (className) => {
-    if (!classList.isLoading) {
-      for (const classObj of classList.data) {
-        if (classObj.name === className){
-          return classObj.participants;
-        }
+  const deleteStudent = (formData) => {
+    fetch("http://localhost:3001/studentInClass", {
+      method: "DELETE",
+      body: JSON.stringify({
+        "studentModelId": formData.studentId,
+        "classModelId": props.classId
+      }),
+      headers: {
+        "Content-Type": "application/json"
       }
-    }
+    });
   };
 
-  const studentList = useFetch("http://localhost:3001/file/" + getStudentList(props.class), {
-    formatter: (response) => response.text()
-  });
-
   const renderStudents = () => {
-    return studentList.isLoading
-      ? <tr><td><Loading/></td></tr>
-      : (
-        studentList.data.split("\n").map(
-          (line, index) => {
-            const fieldArray = line.split(",");
-            return(
-              <tr key={index} className="border-b-2 border-black border-opacity-20">
-                <td className="px-2 py-2 text-center grid justify-items-center">
-                  {fieldArray[0]}
-                </td>
-                <td className="px-2 py-2 text-center">
-                  {fieldArray[1]}
-                </td>
-                <td className="px-2 py-2 text-center">
-                  {fieldArray[2]}
-                </td>
-              </tr>
-            );
-          }
-        )
-      );
+    return studentList.data.map(
+      (studentObj, index) => (
+        <tr key={index} className="border-b-2 border-black border-opacity-20">
+          <td className="px-2 py-2 text-center grid justify-items-center">
+            {studentObj.id}
+          </td>
+          <td className="px-2 py-2 text-center">
+            {studentObj.name}
+          </td>
+          <td className="px-2 py-2 text-center">
+            { (new Date(studentObj.dob)).toLocaleDateString() }
+          </td>
+          <td className="px-2 py-2 text-center">
+            <form onSubmit={handleSubmit(deleteStudent)}>
+              <input type="hidden" {...register("studentId")} value={studentObj.id}></input>
+              <button
+                className="text-red-500 cursor-pointer"
+                type="submit"
+              ><AiFillDelete /></button>
+            </form>
+          </td>
+        </tr>
+      )
+    );
   };
 
   const [modalIsOpen, setModal] = useState(false);
 
   const toggleModal = () => {setModal(!modalIsOpen);};
 
-  const selectStudentList = (evt) => {
-    const studentList = evt.currentTarget.id;
+  const addStudentToClass = (evt) => {
+    const studentId = evt.currentTarget.id;
 
-    fetch(`http://localhost:3001/update/class/${props.class}/students/${studentList}`, {
-      method: "PATCH",
-      body: studentList,
+    fetch("http://localhost:3001/studentInClass", {
+      method: "POST",
+      body: JSON.stringify({
+        "studentModelId": studentId,
+        "classModelId": props.classId
+      }),
       headers: {
-        "Content-Type": "text"
-      },
-    }).then(() => {
-      window.location.reload();
+        "Content-Type": "application/json"
+      }
     });
   };
 
-  const renderTable = () => {
-    return (getStudentList(props.class) === null)
-      ? (
-        <>
-          <div className="flex justify-center w-full pt-10">
-            <div className="inline-block px-5 py-1 text-white cursor-pointer rounded-md bg-rmit-red" onClick={toggleModal}>
-              Add students
-            </div>
-          </div>
-          {modalIsOpen && <NewStudentPopup closePopup={toggleModal} selectFunc={selectStudentList}/>}
-        </>
-      )
-      : (
-        <table className="w-full table-auto">
-          <thead>
-            <tr className="text-rmit-blue">
-              <th className="sticky top-0 py-2 bg-blue-200">Student ID</th>
-              <th className="sticky top-0 py-2 bg-blue-200">Name</th>
-              <th className="sticky top-0 py-2 bg-blue-200">Date of Birth</th>
-            </tr>
-          </thead>
-          <tbody>
-            {renderStudents()}
-          </tbody>
-        </table>
-      );
-  };
+  return (
+    <>
+      <div className="flex justify-end w-full py-2 pr-2">
+        <div onClick={toggleModal} className="inline-block px-5 py-1 text-white cursor-pointer rounded-md bg-rmit-red">
+          Add students
+        </div>
+      </div>
 
-  return classList.isLoading
-    ? <Loading />
-    : (
-      renderTable()
-    );
+      {
+        studentList.isLoading
+          ? <Loading />
+          :  <table className="w-full table-auto">
+            <thead>
+              <tr className="text-rmit-blue">
+                <th className="sticky top-0 py-2 bg-blue-200">Student ID</th>
+                <th className="sticky top-0 py-2 bg-blue-200">Name</th>
+                <th className="sticky top-0 py-2 bg-blue-200">Date of Birth</th>
+                <th className="sticky top-0 py-2 bg-blue-200"></th>
+              </tr>
+            </thead>
+            <tbody>
+              { renderStudents() }
+            </tbody>
+          </table>
+      }
+
+      {modalIsOpen && <SelectStudent closePopup={toggleModal} selectFunc={addStudentToClass} classId={props.classId} />}
+    </>
+  );
 };
 
 Students.propTypes = {
-  class : PropTypes.string.isRequired,
+  classId : PropTypes.string.isRequired,
 };
-
 
 export default Students;

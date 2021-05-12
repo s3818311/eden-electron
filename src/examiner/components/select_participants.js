@@ -1,27 +1,23 @@
 import React from "react";
+import PropTypes from "prop-types";
 import useFetch from "react-fetch-hook";
 import Loading from "../components/loading";
 import { useForm } from "react-hook-form";
 
-const SelectParticipants = () => {
+const SelectParticipants = (props) => {
   const { register } = useForm();
 
   const renderStudentList = () => {
-    const { isLoading, data } = useFetch("http://localhost:3001/file/student1.csv", {
-      formatter: (response) => response.text(),
-    });
+    const { isLoading, data } = useFetch("http://localhost:3001/studentInClass/" + props.classId);
 
     return isLoading
       ? <Loading />
-      : data.split("\n").map((line, index) => {
-        const studentInfo = line.split(",");
-        return (
-          <div key={index} className="flex flex-row items-center">
-            <input type="checkbox" className="w-4 h-5" {...register(studentInfo[1])} />
-            <div className="inline-block px-2 text-lg">{studentInfo[1]}</div>
-          </div>
-        );
-      });
+      : data.map((ele, index) => (
+        <div key={index} className="flex flex-row items-center">
+          <input type="checkbox" className="w-4 h-5" {...register(ele.name)} />
+          <div className="inline-block px-2 text-lg">{ele.name}</div>
+        </div>
+      ));
   };
 
   return (
@@ -31,6 +27,10 @@ const SelectParticipants = () => {
       </div>
     </div>
   );
+};
+
+SelectParticipants.propTypes = {
+  classId : PropTypes.string.isRequired,
 };
 
 export default SelectParticipants;
