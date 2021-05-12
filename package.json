@@ -46,10 +46,17 @@
     "react-icons": "^4.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+    "sequelize": "^6.6.2",
+    "sqlite3": "^5.0.2",
+    "typescript": "^4.2.4",
     "web-vitals": "^1.1.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss7-compat": "^2.0.4",
+    "@types/cors": "^2.8.10",
+    "@types/express": "^4.17.11",
+    "@types/node": "^15.0.1",
+    "@types/sequelize": "^4.28.9",
     "autoprefixer": "^9.8.6",
     "cors": "^2.8.5",
     "eslint": "^7.23.0",
