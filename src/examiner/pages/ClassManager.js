@@ -1,44 +1,35 @@
 import React, { useState } from "react";
 import PopUp from "../components/addClassPopup";
-import ClassObj from "../components/class_tile";
+import ClassTile from "../components/class_tile";
 import Loading from "../components/loading";
 import useFetch from "react-fetch-hook";
 
 const ClassManager = () => {
   const modalAdd = (formData) => {
-    fetch("http://localhost:3001/update/classList.json", {
-      method: "PATCH",
+    fetch("http://localhost:3001/classes", {
+      method: "POST",
       body: JSON.stringify({
         name: formData.className,
-        examList: [],
-        participants: null,
-        results: {
-          available: false,
-          fileName: null
-        }
       }),
       headers: {
         "Content-Type": "application/json"
       },
-    }).then(() => {
-      window.location.reload();
     });
-
   };
 
   const deleteClass = (formData) => {
-    fetch("http://localhost:3001/delete/class/" + formData.class, {
+    fetch("http://localhost:3001/classes/" + formData.classId, {
       method: "DELETE"
     });
   };
 
   const renderClasses = () => {
-    const { isLoading, data } = useFetch("http://localhost:3001/file/classList.json");
+    const { isLoading, data } = useFetch("http://localhost:3001/classes");
 
     return isLoading
       ? <Loading />
       : data.map((classObj, index) => (
-        <ClassObj name={classObj.name} key={index} deleteFunc={deleteClass}></ClassObj>
+        <ClassTile classId={classObj.id} name={classObj.name} key={index} deleteFunc={deleteClass} />
       ));
   };
 
