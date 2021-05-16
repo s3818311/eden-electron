@@ -5,7 +5,7 @@ import ClassManager from "./pages/ClassManager";
 import Dashboard from "./pages/Dashboard";
 import ExamManager from "./pages/ExamManager";
 import WaitingScreen from "./pages/WatingScreen";
-import Exam from "./pages/Exam";
+// import Exam from "./pages/Exam";
 import StudentManager from "./pages/StudentManager";
 
 // import { NavItems } from "./NavItems";
@@ -26,7 +26,7 @@ const App = () => {
           )}
           />
 
-          <Route path="/class/:id/:tab(exam|students|result)" render={({ match }) => (
+          <Route path="/class/:id/:tab(exam|students|result|questions)" render={({ match }) => (
             <>
               <Sidebar />
               <Class tabName={match.params.tab} classId={match.params.id} />
@@ -49,12 +49,12 @@ const App = () => {
             </>)}
           />
 
-          <Route exact path="/exam/:exam" render={({ match }) => (
+          {/* <Route exact path="/exam/:exam" render={({ match }) => (
             <>
               <Sidebar />
               <Exam examName={match.params.exam} />
             </>)}
-          />
+          /> */}
 
           <Route exact path="/test" render={() => <WaitingScreen />} />
 

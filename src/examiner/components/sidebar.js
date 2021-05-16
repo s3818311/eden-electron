@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+// eslint-disable-next-line no-unused-vars
 import { AiFillCaretRight, AiFillCaretLeft, AiOutlineDashboard, AiOutlineTable, AiFillBook, AiOutlineTeam } from "react-icons/ai";
 import { NavLink } from "react-router-dom";
 
@@ -21,11 +22,11 @@ const Sidebar = () => {
       icon: <AiOutlineTable size={isOpen ? 30 : 35} className="transition-all"/>
 
     },
-    {
-      title: "Exam Manager",
-      path: "/exam",
-      icon: <AiFillBook size={isOpen ? 30 : 35} className="transition-all"/>,
-    },
+    // {
+    //   title: "Exam Manager",
+    //   path: "/exam",
+    //   icon: <AiFillBook size={isOpen ? 30 : 35} className="transition-all"/>,
+    // },
     {
       title: "Student Manager",
       path: "/students",
