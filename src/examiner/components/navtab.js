@@ -19,6 +19,10 @@ const NavTab = (props) => {
     {
       "title": "Results",
       "path":"/class/" + props.class + "/result"
+    },
+    {
+      "title": "Question bank",
+      "path": "/class/" + props.class + "/questions"
     }
   ];
 

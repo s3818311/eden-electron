@@ -1,30 +1,10 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
-
+import PropTypes from "prop-types";
 import RadioButton from "./RadioButton";
 
-const Question = () => {
-  const [questionObj, editQuestion] = useState({
-    question: "Question 1",
-    options: [
-      {
-        id: 1,
-        content: "Test1",
-      },
-      {
-        id: 2,
-        content: "Test2",
-      },
-      {
-        id: 3,
-        content: "Test3",
-      },
-      {
-        id: 4,
-        content: "Test4",
-      },
-    ],
-  });
+const Question = (props) => {
+  const [questionObj, editQuestion] = useState(props.questionObj);
 
   const [currentAnswer, setCorrectAnswer] = useState(0);
 
@@ -35,13 +15,20 @@ const Question = () => {
 
   return (
     <div className="py-4 pb-10">
-      <div className="flex flex-wrap content-start p-6 mx-auto bg-white border-2 border-black rounded-lg">
-        <div className="flex items-center w-full pb-10 border-b-2 border-black h-1/6">
+      <div className="flex flex-wrap content-start p-6 mx-auto bg-white border-2 border-gray-400 rounded-lg">
+        <div className="flex items-center w-full pb-10 border-b-2 border-gray-400 h-1/6 grid grid-cols-2">
           <input
-            className="w-1/3 text-2xl text-left border-b-2 text-rmit-blue placeholder-rmit-blue focus:border-blue-400 focus:outline-none"
+            className="w-auto text-2xl text-left border-b-2 text-rmit-blue placeholder-rmit-blue focus:border-blue-400 focus:outline-none"
             type="text"
             placeholder={questionObj.question}
           />
+
+          <div className={`px-6 py-3 text-white  rounded-full place-self-end 
+          ${questionObj.difficulty === "Easy" && "bg-green-500"}
+          ${questionObj.difficulty === "Intermediate" && "bg-yellow-500"}
+          ${questionObj.difficulty === "Hard" && "bg-red-500"}`}>
+            {questionObj.difficulty}
+          </div>
         </div>
 
         <div className="w-full pt-10 pb-3 text-xl ">
@@ -73,6 +60,10 @@ const Question = () => {
       </div>
     </div>
   );
+};
+
+Question.propTypes = {
+  questionObj: PropTypes.object.isRequired
 };
 
 export default Question;

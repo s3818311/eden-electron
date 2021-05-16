@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import StartExam from "../components/class_startexam";
 import Students from "../components/class_student";
 import Result from "../components/class_result";
+import QuestionBank from "../components/class_questions";
 import useFetch from "react-fetch-hook";
 import Loading from "../components/loading";
 
@@ -25,6 +26,7 @@ const Class = (props) => {
           {props.tabName === "exam" && <StartExam classId={props.classId} />}
           {props.tabName === "students" && <Students classId={props.classId} />}
           {props.tabName === "result" && <Result />}
+          {props.tabName === "questions" && <QuestionBank />}
         </div>
       </div>
     );
