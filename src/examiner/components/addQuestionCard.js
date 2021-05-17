@@ -1,15 +1,36 @@
+/* eslint-disable no-unused-vars */
 import React,{useState} from "react";
 import PropTypes from "prop-types";
 import RadioButton from "./RadioButton";
+import { AiFillDelete} from "react-icons/ai";
+
 
 const AddQuestionCard = (props) => {
 
   // eslint-disable-next-line no-unused-vars
   const [currentAnswer, setCorrectAnswer] = useState(1);
 
+  const [options, setOptions] = useState([
+    {
+      "id": 1,
+      "content": "New option"
+    }
+  ]);
+
   const selectOption = (evt) => {
     const id = evt.target.id;
     setCorrectAnswer(id);
+  };
+
+  const addOption = () => {
+    const id = options.length;
+    setOptions([...options, {"id": id, "content": "New Option"}]);
+  };
+
+  const deleteOption = (id) => {
+    setOptions(options.filter(
+      (option) => option.id !== id
+    ));
   };
 
   return (
@@ -30,22 +51,34 @@ const AddQuestionCard = (props) => {
         </div>
 
         <div className="w-full pt-10 pb-3 text-xl ">
-          <div className="py-1 transition-all">
-            <div className="flex items-center ">
-              <RadioButton
-                isSelected={false}
-                toggleCheckBtn={selectOption}
-                optionId={0}/>
-              <input
-                type="text"
-                className="inline-block w-2/3 ml-10 border-b-2 focus:border-blue-400 focus:outline-none"
-                placeholder="Option"
-              />
-            </div>
-          </div>
+          {options.map((item, index)=>{
+            return(
+              <div key = {index} className="py-1 transition-all">
+                <div className="flex items-center ">
+                  <RadioButton
+                    isSelected={false}
+                    toggleCheckBtn={selectOption}
+                    optionId={0}/>
+                  <input
+                    type="text"
+                    className="inline-block w-2/3 ml-10 border-b-2 focus:border-blue-400 focus:outline-none"
+                    placeholder={item.content}
+                  />
+                  <div className="flex items-center flex-grow grid">
+                    <input type="hidden" ></input>
+                    <button
+                      className="text-red-500 cursor-pointer place-self-end"
+                      type="submit"
+                    ><AiFillDelete onClick={()=>{deleteOption(item.id);}}/></button>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
 
-          <div className="pt-1">
-            <button className="p-1 ml-10 border border-black rounded-md hover:bg-gray-200 focus:outline-nones">
+          <div className="pt-5">
+            <button className="p-1 ml-10 border border-gray-400 rounded-md hover:bg-gray-200 focus:outline-nones"
+              onClick={()=>{addOption();}}>
               + Add option
             </button>
           </div>
@@ -56,7 +89,7 @@ const AddQuestionCard = (props) => {
                 Cancel
           </div>
           <div className="inline-block px-5 py-1 text-white bg-green-400 cursor-pointer rounded-md" onClick={props.toggleCard}>
-                Save changes
+                Save question
           </div>
         </div>
       </div>

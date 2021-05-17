@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
 import PropTypes from "prop-types";
 import useFetch from "react-fetch-hook";
@@ -11,21 +12,37 @@ const StartExam = (props) => {
   const autoGrading = watch("autoGrading", false);
   const showParticipant = watch("participant", "all");
 
-  const renderExamList = () => {
-    let { isLoading, data } = useFetch("http://localhost:3001/exams/classId/" + props.classId);
-    return isLoading
-      ? null
-      : data.map((item, index) => {
-        return (
-          <option value={item.name} key={index}>{item.name}</option>
-        );
-      });
-  };
+  // const renderExamList = () => {
+  //   let { isLoading, data } = useFetch("http://localhost:3001/exams/classId/" + props.classId);
+  //   return isLoading
+  //     ? null
+  //     : data.map((item, index) => {
+  //       return (
+  //         <option value={item.name} key={index}>{item.name}</option>
+  //       );
+  //     });
+  // };
 
   return (
     <form className="flex justify-center pt-10">
       <div className="w-1/2 grid auto-rows-auto gap-y-5">
         <div className="flex flex-row items-center">
+          <div className="w-1/2 text-lg text-rmit-blue">
+                Exam title
+          </div>
+          <input type="text" className="w-1/2 px-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600"
+            placeholder="Title" {...register("title")}/>
+        </div>
+
+        <div className="grid grid-rows-2 ">
+          <div className="w-1/2 text-lg text-rmit-blue">
+                Instruction
+          </div>
+          <textarea cols="4" className="w-full h-auto border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600"
+            {...register("instruction")}/>
+        </div>
+
+        {/* <div className="flex flex-row items-center">
           <div className="w-1/2 text-lg text-rmit-blue">
                 Select Exam
           </div>
@@ -35,7 +52,7 @@ const StartExam = (props) => {
           >
             {renderExamList()}
           </select>
-        </div>
+        </div> */}
 
         <div className="flex flex-row items-center">
           <div className="w-1/2 text-lg text-rmit-blue">
