@@ -73,7 +73,7 @@ const Question = (props) => {
 
           <div className={`px-6 py-3 text-white  rounded-full place-self-end 
           ${questionObj.difficulty === "Easy" && "bg-green-500"}
-          ${questionObj.difficulty === "Intermediate" && "bg-yellow-500"}
+          ${questionObj.difficulty === "Medium" && "bg-yellow-500"}
           ${questionObj.difficulty === "Hard" && "bg-red-500"}`}>
             {questionObj.difficulty}
           </div>

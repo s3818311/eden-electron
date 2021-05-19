@@ -8,7 +8,7 @@ import { AiFillDelete} from "react-icons/ai";
 const AddQuestionCard = (props) => {
 
   // eslint-disable-next-line no-unused-vars
-  const [currentAnswer, setCorrectAnswer] = useState(1);
+  const [currentAnswer, setCorrectAnswer] = useState(0);
 
   const [options, setOptions] = useState([
     {
@@ -38,14 +38,14 @@ const AddQuestionCard = (props) => {
       <div className="flex flex-wrap content-start p-6 mx-auto bg-white border-2 border-gray-400 rounded-lg">
         <div className="flex items-center w-full pb-10 border-b-2 border-gray-400 h-1/6 grid grid-cols-2">
           <input
-            className="w-auto text-2xl text-left border-b-2 text-rmit-blue placeholder-rmit-blue focus:border-blue-400 focus:outline-none"
+            className="w-auto text-2xl text-left border-b-2 text-rmit-blue focus:border-blue-400 focus:outline-none"
             type="text"
             placeholder="New Question"
           />
 
           <select name="difficulty" id="" className="inline-block w-1/2 px-2 py-1 border place-self-end transition-all rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600">
             <option value="easy"> Easy</option>
-            <option value="intermediate"> Intermediate</option>
+            <option value="medium"> Medium </option>
             <option value="hard"> Hard</option>
           </select>
         </div>
@@ -56,9 +56,9 @@ const AddQuestionCard = (props) => {
               <div key = {index} className="py-1 transition-all">
                 <div className="flex items-center ">
                   <RadioButton
-                    isSelected={false}
+                    isSelected={item.id === Number(currentAnswer)}
                     toggleCheckBtn={selectOption}
-                    optionId={0}/>
+                    optionId={item.id}/>
                   <input
                     type="text"
                     className="inline-block w-2/3 ml-10 border-b-2 focus:border-blue-400 focus:outline-none"

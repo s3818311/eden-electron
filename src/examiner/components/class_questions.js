@@ -48,7 +48,7 @@ function QuestionBank() {
           content: "Test4",
         },
       ],
-      difficulty: "Intermediate"
+      difficulty: "Medium"
     },
     {
       question: "Question 3",
