@@ -1,6 +1,11 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
 import PropTypes from "prop-types";
 import {AiFillEdit} from "react-icons/ai";
+import ClassTile from "../components/class_tile";
+import Loading from "../components/loading";
+import useFetch from "react-fetch-hook";
+
 
 const courses =[
   {id:1,
@@ -19,39 +24,43 @@ const courses =[
     img: "https://blog.radware.com/wp-content/uploads/2019/10/SDLC.jpg"
   },
 ];
+
 const recipes =[
   {id:1,
 
-    title:"Add new exam for data structure",
-    time:"60 mins",
-    author:"DATA001"
+    title:"Exam 1 result",
+    // time:"60 mins",
+    // author:"DATA001"
   },
+
   {id:2,
-    title:"Grade midterm exam for Software Architecture",
-    time:"80 minutes",
-    author:"ISYS114"
+    title:"Exam 2 result",
+    // time:"80 minutes",
+    // author:"ISYS114"
   }
 ];
+
+
 const Course= (course)=>{
   const {title,code,img} = course.course;
   return (
-    <section className="grid grid-cols-1 px-4 sm:px-6 lg:px-4 xl:px-6 pt-4 pb-4 sm:pb-6 lg:pb-4 xl:pb-6 space-y-4">
+    <div className="px-4 pt-4 pb-4 grid grid-cols-1 sm:px-6 lg:px-4 xl:px-6 sm:pb-6 lg:pb-4 xl:pb-6 space-y-4">
       <ul className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 xl:grid-cols-1 gap-4">
         <li x-for="item in items">
-          <a  className="hover:bg-light-blue-500 hover:border-transparent hover:shadow-lg group block rounded-lg p-4 border border-gray-200">
-            <dl className="grid grid-cols-2 sm:block lg:grid xl:block grid-cols-2 grid-rows-2 items-center">
+          <a  className="block p-4 border border-gray-200 rounded-lg hover:bg-light-blue-500 hover:border-transparent hover:shadow-lg group">
+            <dl className="items-center grid grid-cols-2 sm:block lg:grid xl:block grid-rows-2">
               <div>
                 <img src ={img}></img>
               </div>
               <div>
                 <dt className="sr-only">Title</dt>
-                <dd className="group-hover:text-rmit-blue leading-6 font-medium text-black">
+                <dd className="font-medium text-black group-hover:text-rmit-blue leading-6">
                   {title}
                 </dd>
               </div>
               <div>
                 <dt className="sr-only">Code</dt>
-                <dd className="group-hover:text-light-blue-200 text-sm font-medium sm:mb-4 lg:mb-0 xl:mb-4">
+                <dd className="text-sm font-medium group-hover:text-light-blue-200 sm:mb-4 lg:mb-0 xl:mb-4">
                   {code}
                 </dd>
               </div>
@@ -59,58 +68,61 @@ const Course= (course)=>{
           </a>
         </li>
       </ul>
-    </section> );
+    </div> );
 };
-function Booklist(){
-  return(
-    <div className="">{courses.map((course)=>
-    // {const {img,title,author} = book;
-    {return (
-      <Course key={course.id} course={course}></Course>);
-    })}
-    </div>
-  );
-}
+
+// function Booklist(){
+//   return(
+//     <div className="">{courses.map((course)=>
+//     // {const {img,title,author} = book;
+//     {return (
+//       <Course key={course.id} course={course}></Course>);
+//     })}
+//     </div>
+//   );
+// }
+
 function ListItem(recipe) {
-  const {title,time,author}= recipe.recipe;
+  const {title}= recipe.recipe;
   return (
-    <article className="p-4 flex space-x-4">
-      <div className="text-6xl">
+    <div className="flex p-4 space-x-4">
+      <div className="text-3xl">
         <AiFillEdit/>
       </div>
-      <div className="min-w-0 relative flex-auto sm:pr-20 lg:pr-0 xl:pr-20">
+      <div className="relative flex-auto min-w-0 sm:pr-20 lg:pr-0 xl:pr-20">
         <h2 className="text-lg font-semibold text-black mb-0.5">
           {title}
         </h2>
-        <dl className="flex flex-wrap text-sm font-medium whitespace-pre">
+        {/* <dl className="flex flex-wrap text-sm font-medium whitespace-pre">
           <div>
             <dt className="sr-only">Time</dt>
             <dd>
               <abbr title={`${time} minutes`}>{time}</abbr>
             </dd>
           </div>
-          <div className="flex-none w-full mt-0.5 font-normal">
+          <div className="flex-none w-full font-normal mt-0.5">
             <dt className="inline">By </dt>{""}
             <dd className="inline text-black">{author}</dd>
           </div>
-        </dl>
+        </dl> */}
       </div>
-    </article>
+    </div>
   );
 }
+
 function Recipes() {
   return (
     <div className="divide-y-2 divide-dashed md:divide-solid">
       <nav className="p-4">
         <ul className="flex space-x-2">
           <li>
-            <a className="bg-green-700 text-amber-900 px-8 py-0.5 hidden sm:flex lg:hidden xl:flex items-center space-x-1">
-            To Do</a>
+            <a className="items-center hidden px-8 text-white bg-rmit-blue rounded-md text-amber-900 py-0.5 sm:flex lg:hidden xl:flex space-x-1">
+            Recent results</a>
           </li>
-          <li>
-            <a className="bg-blue-300 text-amber-900 px-8 py-0.5 hidden sm:flex lg:hidden xl:flex items-center space-x-1">
+          {/* <li>
+            <a className="items-center hidden px-8 bg-blue-300 rounded-md text-amber-900 py-0.5 sm:flex lg:hidden xl:flex space-x-1">
             Scheduled exam</a>
-          </li>
+          </li> */}
         </ul>
       </nav>
       <ul className="divide-y divide-teal-400 md:divide-pink-400"></ul>
@@ -123,6 +135,23 @@ function Recipes() {
   );
 }
 
+const deleteClass = (formData) => {
+  fetch("http://localhost:3001/classes/" + formData.classId, {
+    method: "DELETE"
+  });
+};
+
+
+const renderClasses = () => {
+  const { isLoading, data } = useFetch("http://localhost:3001/classes");
+
+  return isLoading
+    ? <Loading />
+    : data.map((classObj, index) => (
+      <ClassTile classId={classObj.id} name={classObj.name} key={index} deleteFunc={deleteClass} />
+    ));
+};
+
 
 const Dashboard = () => {
   return (
@@ -132,28 +161,31 @@ const Dashboard = () => {
           Dashboard
         </div>
       </div>
-      <div className="flex flex-wrap md:flex-wrap-reverse ... pb-5">
+      <div className="flex flex-wrap pb-5 md:flex-wrap-reverse ...">
         <div className="pt-6 text-2xl text-rmit-blue">
-          Recently accessed folders
+          Recently accessed classes
         </div>
       </div>
       <form className="relative">
-        <svg width="20" height="20" fill="currentColor" className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+        <svg width="20" height="20" fill="currentColor" className="absolute text-gray-400 left-3 top-1/2 transform -translate-y-1/2">
           <path fillrule="evenodd" cliprule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" />
         </svg>
-        <input className="focus:border-light-blue-500 focus:ring-1 focus:ring-light-blue-500 focus:outline-none w-full text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-10" type="text" aria-label="Filter projects" placeholder="Filter projects" />
+        <input className="w-full py-2 pl-10 text-sm text-black placeholder-gray-500 border border-gray-200 focus:border-light-blue-500 focus:ring-1 focus:ring-light-blue-500 focus:outline-none rounded-md" type="text" aria-label="Filter projects" placeholder="Filter projects" />
       </form>
-      <div className ="flex overflow-y-scroll h-96">
-        <div className="flex flex-row flex-wrap content-start h-full  w-2/3">
-          <Booklist></Booklist>
+
+      <div className ="flex flex-grow overflow-auto">
+        <div className="flex flex-row flex-wrap content-start w-2/3 h-full">
+          {/* <Booklist></Booklist> */}
+          {renderClasses()}
         </div>
-        <div className="flex flex-row flex-wrap content-start h-full  w-1/2">
+        <div className="sticky top-0 flex flex-row flex-wrap content-start w-1/2 h-full">
           <Recipes/>
         </div>
       </div>
     </div>
   );
 };
+
 Dashboard.propTypes = {
   tabName : PropTypes.string.isRequired,
   className : PropTypes.string.isRequired,
