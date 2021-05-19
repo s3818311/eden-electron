@@ -23,7 +23,7 @@ const AddQuestionCard = (props) => {
   };
 
   const addOption = () => {
-    const id = options.length;
+    const id = options.length + 1;
     setOptions([...options, {"id": id, "content": "New Option"}]);
   };
 
