@@ -5,6 +5,10 @@ module.exports = (sequelize) => {
     title: {
       allowNull: false,
       type: DataTypes.STRING,
-    }
+    },
+    isCorrectAnswer: {
+      allowNull: false,
+      type: DataTypes.BOOLEAN,
+    },
   });
 };

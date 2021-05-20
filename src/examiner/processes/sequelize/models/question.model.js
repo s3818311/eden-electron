@@ -6,11 +6,11 @@ module.exports = (sequelize) => {
       allowNull: false,
       type: DataTypes.STRING,
     },
-    type: {
+    difficulty: {
       allowNull: false,
       type: DataTypes.STRING,
       validate: {
-        isIn: [["multiple-choice"]]
+        isIn: [["easy", "medium", "hard"]]
       }
     }
   });

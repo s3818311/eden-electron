@@ -5,7 +5,9 @@ const routes = {
   classes: require("./routes/classRoutes"),
   exams: require("./routes/examRoutes"),
   students: require("./routes/studentRoutes"),
-  studentInClass: require("./routes/StudentInClassRoutes")
+  studentInClass: require("./routes/StudentInClassRoutes"),
+  questions: require("./routes/questionRoutes"),
+  answers: require("./routes/answerRoutes")
 };
 
 const app = express();
@@ -42,6 +44,10 @@ for (const [routeName, routeController] of Object.entries(routes)){
 
   if (routeController.getByClassId) {
     app.get(`/${routeName}/classId/:id`, makeHandlerAwareOfAsyncErrors(routeController.getByClassId));
+  }
+
+  if (routeController.getByQuestionId) {
+    app.get(`/${routeName}/questionId/:id`, makeHandlerAwareOfAsyncErrors(routeController.getByQuestionId));
   }
 
   if (routeController.getStudentsByClassId) {
