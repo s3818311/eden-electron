@@ -10,8 +10,8 @@ module.exports = (sequelize) => {
       allowNull: false,
       type: DataTypes.STRING,
       validate: {
-        isIn: [["easy", "medium", "hard"]]
-      }
-    }
+        isIn: [["easy", "medium", "hard"]],
+      },
+    },
   });
 };
