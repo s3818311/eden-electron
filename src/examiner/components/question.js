@@ -2,10 +2,14 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import RadioButton from "./RadioButton";
-import { AiFillDelete, AiOutlineCheck, AiFillSave} from "react-icons/ai";
+import { AiFillDelete, AiOutlineCheck, AiFillSave } from "react-icons/ai";
+import useFetch from "react-fetch-hook";
+import Loading from "./loading";
 
 const Question = (props) => {
-  const [questionObj, editQuestion] = useState(props.questionObj);
+  const optionList = useFetch(
+    "http://localhost:3001/answers/questionId/" + props.questionObj.id
+  );
 
   const [currentAnswer, setCorrectAnswer] = useState(0);
 
@@ -17,11 +21,11 @@ const Question = (props) => {
   //check if the answer is updated
   const [isModified, setModified] = useState(false);
 
-  const toggleModified = () =>{
+  const toggleModified = () => {
     setModified(true);
   };
 
-  const cancelModified = () =>{
+  const cancelModified = () => {
     location.reload();
   };
 
@@ -33,102 +37,124 @@ const Question = (props) => {
   };
 
   const newOptionForm = () => {
-    return(
+    return (
       <div className="py-1 transition-all">
         <div className="flex items-center ">
-          <RadioButton/>
+          <RadioButton />
           <input
             type="text"
             className="inline-block w-2/3 ml-10 border-b-2 focus:border-blue-400 focus:outline-none"
             placeholder="New Option"
           />{" "}
           <form className="flex items-center flex-grow grid grid-cols-2">
-            <input type="hidden" ></input>
-            <button className = "text-green-400 cursor-pointer place-self-end"
-              onClick={toggleNewOption}>
+            <input type="hidden"></input>
+            <button
+              className="text-green-400 cursor-pointer place-self-end"
+              onClick={toggleNewOption}
+            >
               <AiOutlineCheck />
             </button>
 
             <button
               className="text-red-500 cursor-pointer place-self-end"
               onClick={toggleNewOption}
-            ><AiFillDelete /></button>
+            >
+              <AiFillDelete />
+            </button>
           </form>
         </div>
       </div>
     );
   };
 
-
   return (
-    <div className="py-4 pb-10">
-      <div className="flex flex-wrap content-start p-6 mx-auto bg-white border-2 border-gray-400 rounded-lg">
-        <div className="flex items-center w-full pb-10 border-b-2 border-gray-400 h-1/6 grid grid-cols-2">
+    <div className="p-4 pb-0">
+      <div className="flex flex-wrap content-start p-6 pb-2 mx-auto bg-white border-2 border-gray-400 rounded-lg">
+        <div className="flex items-center w-full pb-3 border-b-2 border-gray-400 h-1/6 grid grid-cols-2">
           <input
             className="w-auto text-2xl text-left border-b-2 text-rmit-blue placeholder-rmit-blue focus:border-blue-400 focus:outline-none"
             type="text"
-            placeholder={questionObj.question}
-            onChange={()=>{toggleModified();}}
+            placeholder={props.questionObj.title}
+            onChange={() => {
+              toggleModified();
+            }}
           />
 
-          <div className={`px-6 py-3 text-white  rounded-full place-self-end 
-          ${questionObj.difficulty === "Easy" && "bg-green-500"}
-          ${questionObj.difficulty === "Medium" && "bg-yellow-500"}
-          ${questionObj.difficulty === "Hard" && "bg-red-500"}`}>
-            {questionObj.difficulty}
+          <div
+            className={`px-6 py-3 text-white  rounded-full place-self-end 
+          ${props.questionObj.difficulty === "easy" && "bg-green-500"}
+          ${props.questionObj.difficulty === "medium" && "bg-yellow-500"}
+          ${props.questionObj.difficulty === "hard" && "bg-red-500"}`}
+          >
+            {props.questionObj.difficulty.charAt(0).toUpperCase() +
+              props.questionObj.difficulty.slice(1)}
           </div>
         </div>
 
         <div className="w-full pt-10 pb-3 text-xl ">
-          {questionObj.options.map((item, index) => {
-            return (
-              <div key={index} className="py-1 transition-all">
-                <div className="flex items-center">
-                  <RadioButton
-                    isSelected={item.id === Number(currentAnswer)}
-                    toggleCheckBtn={selectOption}
-                    optionId={item.id}
-                  />
-                  <input
-                    type="text"
-                    className="inline-block w-2/3 ml-10 border-b-2 focus:border-blue-400 focus:outline-none"
-                    placeholder={item.content}
-                    onChange={()=>{toggleModified();}}
-                  />{" "}
-                  <form className="flex items-center flex-grow grid">
-                    <input type="hidden" ></input>
-                    <button
-                      className="text-red-500 cursor-pointer place-self-end"
-                      type="submit"
-                    ><AiFillDelete /></button>
-                  </form>
+          {optionList.isLoading ? (
+            <Loading />
+          ) : (
+            optionList.data.map((item, index) => {
+              return (
+                <div key={index} className="py-1 transition-all">
+                  <div className="flex items-center">
+                    <RadioButton
+                      isSelected={!!item.isCorrectAnswer}
+                      toggleCheckBtn={selectOption}
+                      optionId={item.id}
+                    />
+                    <input
+                      type="text"
+                      className="inline-block w-2/3 ml-10 border-b-2 focus:border-blue-400 focus:outline-none"
+                      placeholder={item.title}
+                      onChange={() => {
+                        toggleModified();
+                      }}
+                    />
+                    <form className="flex items-center flex-grow grid">
+                      <input type="hidden"></input>
+                      <button
+                        className="text-red-500 cursor-pointer place-self-end"
+                        type="submit"
+                      >
+                        <AiFillDelete />
+                      </button>
+                    </form>
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })
+          )}
 
-          {newOptions ?
-            newOptionForm() :
-            (<div className="pt-5">
-              <button className="p-1 ml-10 border border-gray-400 rounded-md hover:bg-gray-200 focus:outline-nones"
-                onClick={toggleNewOption}>
-            + Add option
+          {newOptions ? (
+            newOptionForm()
+          ) : (
+            <div className="pt-5">
+              <button
+                className="p-1 px-3 ml-10 border border-gray-400 rounded-md hover:bg-gray-200 focus:outline-nones"
+                onClick={toggleNewOption}
+              >
+                + Add option
               </button>
-            </div>)}
+            </div>
+          )}
 
-          {isModified &&
-            (
-              <div className="flex justify-end w-full py-5">
-                <div className="inline-block px-5 py-1 mx-3 text-white cursor-pointer rounded-md bg-rmit-red" onClick={()=>{cancelModified();}}>
+          {isModified && (
+            <div className="flex justify-end w-full py-5">
+              <div
+                className="inline-block px-5 py-1 mx-3 text-white cursor-pointer rounded-md bg-rmit-red"
+                onClick={() => {
+                  cancelModified();
+                }}
+              >
                 Cancel
-                </div>
-                <div className="inline-block px-5 py-1 text-white bg-green-400 cursor-pointer rounded-md">
-                Save changes
-                </div>
               </div>
-            )
-          }
-
+              <div className="inline-block px-5 py-1 text-white bg-green-400 cursor-pointer rounded-md">
+                Save changes
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
@@ -136,7 +162,7 @@ const Question = (props) => {
 };
 
 Question.propTypes = {
-  questionObj: PropTypes.object.isRequired
+  questionObj: PropTypes.object.isRequired,
 };
 
 export default Question;

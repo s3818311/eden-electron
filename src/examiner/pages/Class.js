@@ -26,7 +26,7 @@ const Class = (props) => {
           {props.tabName === "exam" && <StartExam classId={props.classId} />}
           {props.tabName === "students" && <Students classId={props.classId} />}
           {props.tabName === "result" && <Result />}
-          {props.tabName === "questions" && <QuestionBank />}
+          {props.tabName === "questions" && <QuestionBank classId={props.classId} />}
         </div>
       </div>
     );
