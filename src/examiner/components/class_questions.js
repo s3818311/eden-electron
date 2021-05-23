@@ -16,7 +16,7 @@ const QuestionBank = (props) => {
     toggleCard(!addQuestion);
   };
 
-  const buttonToggleCard = () => {
+  const addStudentBtn = () => {
     return (
       <div className="flex justify-center w-full py-5">
         <div
@@ -47,7 +47,7 @@ const QuestionBank = (props) => {
           toggleCard={toggleAddQuestion}
         />
       ) : (
-        buttonToggleCard()
+        addStudentBtn()
       )}
     </div>
   );

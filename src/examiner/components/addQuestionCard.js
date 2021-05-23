@@ -34,6 +34,7 @@ const AddQuestionCard = (props) => {
   const submitQuestion = async (formData) => {
     // console.log(formData);
     let questionId = null;
+
     await fetch("http://localhost:3001/questions", {
       method: "POST",
       body: JSON.stringify({
