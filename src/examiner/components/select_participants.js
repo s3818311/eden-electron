@@ -1,23 +1,25 @@
 import React from "react";
 import PropTypes from "prop-types";
-import useFetch from "react-fetch-hook";
 import Loading from "../components/loading";
-import { useForm } from "react-hook-form";
 
 const SelectParticipants = (props) => {
-  const { register } = useForm();
-
   const renderStudentList = () => {
-    const { isLoading, data } = useFetch("http://localhost:3001/studentInClass/" + props.classId);
-
-    return isLoading
-      ? <Loading />
-      : data.map((ele, index) => (
+    return props.studentFetch.isLoading ? (
+      <Loading />
+    ) : (
+      props.studentFetch.data.map((ele, index) => (
         <div key={index} className="flex flex-row items-center">
-          <input type="checkbox" className="w-4 h-5" {...register(ele.name)} />
+          <input
+            type="checkbox"
+            className="w-4 h-5"
+            {...props.register("students[]")}
+            value={ele.id}
+            defaultChecked={true}
+          />
           <div className="inline-block px-2 text-lg">{ele.name}</div>
         </div>
-      ));
+      ))
+    );
   };
 
   return (
@@ -30,7 +32,8 @@ const SelectParticipants = (props) => {
 };
 
 SelectParticipants.propTypes = {
-  classId : PropTypes.string.isRequired,
+  studentFetch: PropTypes.object.isRequired,
+  register: PropTypes.func.isRequired,
 };
 
 export default SelectParticipants;
