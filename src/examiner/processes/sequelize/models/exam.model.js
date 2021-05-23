@@ -16,5 +16,25 @@ module.exports = (sequelize) => {
       allowNull: false,
       type: DataTypes.TEXT,
     },
+    autoGrading: {
+      allowNull: false,
+      type: DataTypes.BOOLEAN,
+    },
+    hasTimeLimit: {
+      allowNull: false,
+      type: DataTypes.BOOLEAN,
+    },
+    timeLimit: {
+      allowNull: true,
+      type: DataTypes.INTEGER,
+    },
+    shuffleAnswers: {
+      allowNull: false,
+      type: DataTypes.BOOLEAN,
+    },
+    shuffleQuestions: {
+      allowNull: false,
+      type: DataTypes.BOOLEAN,
+    },
   });
 };
