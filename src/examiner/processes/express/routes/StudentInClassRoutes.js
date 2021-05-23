@@ -5,17 +5,17 @@ const getStudentsByClassId = async (req, res) => {
   const classId = Number.parseInt(req.params.id, 10);
   const rows = await models.StudentInClass.findAll({
     where: {
-      classModelId: classId
+      classModelId: classId,
     },
-    attributes: ["studentModelId"]
+    attributes: ["studentModelId"],
   });
 
-  const studentIds = rows.map(obj => obj.studentModelId);
+  const studentIds = rows.map((obj) => obj.studentModelId);
 
   const students = await models.studentModel.findAll({
     where: {
-      id: studentIds
-    }
+      id: studentIds,
+    },
   });
 
   res.status(200).send(students);
@@ -25,19 +25,19 @@ const getStudentsNotInClass = async (req, res) => {
   const classId = Number.parseInt(req.params.id, 10);
   const rows = await models.StudentInClass.findAll({
     where: {
-      classModelId: classId
+      classModelId: classId,
     },
-    attributes: ["studentModelId"]
+    attributes: ["studentModelId"],
   });
 
-  const studentIds = rows.map(obj => obj.studentModelId);
+  const studentIds = rows.map((obj) => obj.studentModelId);
 
   const students = await models.studentModel.findAll({
     where: {
       id: {
-        [Op.not]: studentIds
-      }
-    }
+        [Op.not]: studentIds,
+      },
+    },
   });
 
   res.status(200).send(students);
@@ -46,15 +46,16 @@ const getStudentsNotInClass = async (req, res) => {
 const create = async (req, res) => {
   const studentId = req.body.studentModelId;
   const classId = req.body.classModelId;
-  const [created] = await models.StudentInClass.findOrCreate({
+  // eslint-disable-next-line no-unused-vars
+  const [student, created] = await models.StudentInClass.findOrCreate({
     where: {
       studentModelId: studentId,
       classModelId: classId,
-    }
+    },
   });
 
   created
-    ? res.status(201).end()
+    ? res.status(201)
     : res.status(400).send("Student already existed in this class");
 };
 
@@ -65,12 +66,16 @@ const removeStudentFromClass = async (req, res) => {
   await models.StudentInClass.destroy({
     where: {
       studentModelId: studentId,
-      classModelId: classId
-    }
+      classModelId: classId,
+    },
   });
 
   res.status(200).end();
 };
 
-
-module.exports = { getStudentsByClassId, getStudentsNotInClass, create, removeStudentFromClass };
+module.exports = {
+  getStudentsByClassId,
+  getStudentsNotInClass,
+  create,
+  removeStudentFromClass,
+};

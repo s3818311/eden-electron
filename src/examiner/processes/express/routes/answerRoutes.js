@@ -11,7 +11,6 @@ const getByQuestionId = async (req, res) => {
 };
 
 const create = async (req, res) => {
-  console.log(req.body);
   const questionId = req.body.questionId;
   const correctId = req.body.correctOptionId;
   req.body.options.map(async (title, index) => {

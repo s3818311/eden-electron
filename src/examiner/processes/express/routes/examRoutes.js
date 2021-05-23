@@ -9,23 +9,24 @@ const getByClassId = async (req, res) => {
   const classId = Number.parseInt(req.params.id, 10);
   const exams = await models.examModel.findAll({
     where: {
-      classModelId: classId
-    }
+      classModelId: classId,
+    },
   });
   res.status(200).json(exams);
 };
 
 const create = async (req, res) => {
-  await models.examModel.create(req.body);
-  res.status(201).end();
+  const exam = await models.examModel.create(req.body);
+
+  res.status(201).json(exam.id);
 };
 
 const remove = async (req, res) => {
   const id = Number.parseInt(req.params.id, 10);
   await models.examModel.destroy({
     where: {
-      id: id
-    }
+      id: id,
+    },
   });
   res.status(200).end();
 };
