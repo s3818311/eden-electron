@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import useFetch from "react-fetch-hook";
 import PropTypes from "prop-types";
 import Loading from "./loading";
 
 const Result = (props) => {
+  const [hasData, setHasData] = useState(false);
+
   const exams = useFetch(
     "http://localhost:3001/exams/classId/" + props.classId
   );
@@ -47,6 +49,7 @@ const Result = (props) => {
   };
 
   const renderExams = () => {
+    if (exams.data.length != 0) setHasData(true);
     return exams.data.map((exam, index) => (
       <th key={index} className="sticky top-0 py-2 bg-blue-200">
         {exam.title}
@@ -73,7 +76,17 @@ const Result = (props) => {
               {renderExams()}
             </tr>
           </thead>
-          <tbody>{renderResults()}</tbody>
+          <tbody>
+            {hasData ? (
+              renderResults()
+            ) : (
+              <tr>
+                <td colSpan="2" className="text-center">
+                  No results recorded
+                </td>
+              </tr>
+            )}
+          </tbody>
         </table>
       )}
     </>
