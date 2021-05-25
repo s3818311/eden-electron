@@ -13,14 +13,16 @@ const getByQuestionId = async (req, res) => {
 const create = async (req, res) => {
   const questionId = req.body.questionId;
   const correctId = req.body.correctOptionId;
-  req.body.options.map(async (title, index) => {
+
+  await req.body.options.reduce(async (memo, title, index) => {
+    await memo;
     const answerObj = {
       title: title,
       isCorrectAnswer: index === correctId,
       questionModelId: questionId,
     };
     await models.answerModel.create(answerObj);
-  });
+  }, undefined);
 
   res.status(201).end();
 };
