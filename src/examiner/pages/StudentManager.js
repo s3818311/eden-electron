@@ -1,16 +1,15 @@
 import React, { useState } from "react";
 import UploadModal from "../components/uploadModal";
 import { AiFillDelete } from "react-icons/ai";
-import { useForm } from "react-hook-form";
 import useFetch from "react-fetch-hook";
 import Loading from "../components/loading";
 
 const StudentManager = () => {
   const students = useFetch("http://localhost:3001/students");
-  const { register, handleSubmit } = useForm();
 
-  const deleteStudent = (formData) => {
-    fetch(`http://localhost:3001/students/${formData.studentId}`, {
+  const deleteStudent = (evt) => {
+    evt.preventDefault();
+    fetch(`http://localhost:3001/students/${evt.target[0].value}`, {
       method: "DELETE",
     });
   };
@@ -45,12 +44,8 @@ const StudentManager = () => {
           })}
         </td>
         <td className="p-2 text-center">
-          <form onSubmit={handleSubmit(deleteStudent)}>
-            <input
-              type="hidden"
-              {...register("studentId")}
-              value={studentObj.id}
-            ></input>
+          <form onSubmit={deleteStudent}>
+            <input type="hidden" name="studentId" value={studentObj.id}></input>
             <button className="text-red-500 cursor-pointer" type="submit">
               <AiFillDelete />
             </button>

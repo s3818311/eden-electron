@@ -4,19 +4,18 @@ import SelectStudent from "./select_student_popup";
 import Loading from "../components/loading";
 import PropTypes from "prop-types";
 import { AiFillDelete } from "react-icons/ai";
-import { useForm } from "react-hook-form";
 
 const Students = (props) => {
   const studentList = useFetch(
     "http://localhost:3001/studentInClass/" + props.classId
   );
-  const { register, handleSubmit } = useForm();
 
-  const deleteStudent = (formData) => {
+  const deleteStudent = (evt) => {
+    evt.preventDefault();
     fetch("http://localhost:3001/studentInClass", {
       method: "DELETE",
       body: JSON.stringify({
-        studentModelId: formData.studentId,
+        studentModelId: evt.target[0].value,
         classModelId: props.classId,
       }),
       headers: {
@@ -26,29 +25,32 @@ const Students = (props) => {
   };
 
   const renderStudents = () => {
-    return studentList.data.map((studentObj, index) => (
-      <tr key={index} className="border-b-2 border-black border-opacity-20">
-        <td className="px-2 py-2 text-center grid justify-items-center">
-          {studentObj.id}
-        </td>
-        <td className="px-2 py-2 text-center">{studentObj.name}</td>
-        <td className="px-2 py-2 text-center">
-          {new Date(studentObj.dob).toLocaleDateString()}
-        </td>
-        <td className="px-2 py-2 text-center">
-          <form onSubmit={handleSubmit(deleteStudent)}>
-            <input
-              type="hidden"
-              {...register("studentId")}
-              value={studentObj.id}
-            ></input>
-            <button className="text-red-500 cursor-pointer" type="submit">
-              <AiFillDelete />
-            </button>
-          </form>
-        </td>
-      </tr>
-    ));
+    return studentList.data.map((studentObj, index) => {
+      // console.log(studentObj.id);
+      return (
+        <tr key={index} className="border-b-2 border-black border-opacity-20">
+          <td className="px-2 py-2 text-center grid justify-items-center">
+            {studentObj.id}
+          </td>
+          <td className="px-2 py-2 text-center">{studentObj.name}</td>
+          <td className="px-2 py-2 text-center">
+            {new Date(studentObj.dob).toLocaleDateString()}
+          </td>
+          <td className="px-2 py-2 text-center">
+            <form onSubmit={deleteStudent}>
+              <input
+                type="hidden"
+                name="studentId"
+                value={studentObj.id}
+              ></input>
+              <button className="text-red-500 cursor-pointer" type="submit">
+                <AiFillDelete />
+              </button>
+            </form>
+          </td>
+        </tr>
+      );
+    });
   };
 
   const [modalIsOpen, setModal] = useState(false);
