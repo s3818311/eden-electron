@@ -3,12 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "craco start",
+    "start": "concurrently \"npm:start:server\" \"npm:start:craco\"",
     "build": "craco build",
     "test": "craco test",
     "postcss:examiner": "npx postcss src/examiner/App.css -o src/examiner/tailwind.css",
-    "postcss:examinee": "npx postcss src/examinee/App.css -o src/examinee/tailwind.css"
+    "postcss:examinee": "npx postcss src/examinee/App.css -o src/examinee/tailwind.css",
+    "start:server": "npx nodemon --trace-warnings src/examiner/processes/server.js",
+    "start:craco": "craco start"
   },
+  "homepage": "/dashboard",
+  "proxy": "http://localhost:3001",
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -32,18 +36,35 @@
     "@testing-library/jest-dom": "^5.11.10",
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.8.3",
+    "concurrently": "^6.0.2",
+    "express": "^4.17.1",
+    "multer": "^1.4.2",
     "postcss-cli": "^7.1.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-fetch-hook": "^1.8.5",
+    "react-icons": "^4.2.0",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+    "sequelize": "^6.6.2",
+    "sqlite3": "^5.0.2",
+    "typescript": "^4.2.4",
     "web-vitals": "^1.1.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss7-compat": "^2.0.4",
+    "@types/cors": "^2.8.10",
+    "@types/express": "^4.17.11",
+    "@types/node": "^15.0.1",
+    "@types/sequelize": "^4.28.9",
     "autoprefixer": "^9.8.6",
+    "cors": "^2.8.5",
     "eslint": "^7.23.0",
     "eslint-plugin-react": "^7.23.1",
+    "eslint-plugin-tailwind": "^0.2.1",
+    "nodemon": "^2.0.7",
     "postcss": "^7.0.35",
+    "react-hook-form": "^7.2.1",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.4"
   }
 }

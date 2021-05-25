@@ -6,6 +6,7 @@ module.exports = {
       colors: {
         "rmit-red": "#E60028",
         "rmit-blue": "#000054",
+        "nav-hover": "#383895",
       },
     },
   },
