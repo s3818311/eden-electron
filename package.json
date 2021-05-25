@@ -45,6 +45,8 @@
     "react-fetch-hook": "^1.8.5",
     "react-icons": "^4.2.0",
     "react-router-dom": "^5.2.0",
+    "react-hook-form": "^7.3.4",
+    "react-loader-spinner": "^4.0.0",
     "react-scripts": "4.0.3",
     "sequelize": "^6.6.2",
     "sqlite3": "^5.0.2",
