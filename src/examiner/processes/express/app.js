@@ -1,6 +1,10 @@
 const express = require("express");
 const cors = require("cors");
 
+const multer = require("multer");
+const upload = multer({ dest: "tmp/csv/" });
+
+
 const routes = {
   classes: require("./routes/classRoutes"),
   exams: require("./routes/examRoutes"),
@@ -27,6 +31,13 @@ const makeHandlerAwareOfAsyncErrors = (handler) => {
 };
 
 for (const [routeName, routeController] of Object.entries(routes)) {
+  if (routeController.upload) {
+    app.post(
+      `/${routeName}/upload`, upload.single("file"),
+      makeHandlerAwareOfAsyncErrors(routeController.upload)
+    );
+  }
+
   if (routeController.create) {
     app.post(
       `/${routeName}`,

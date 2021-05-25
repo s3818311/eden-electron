@@ -20,7 +20,7 @@ const StudentManager = () => {
     const upload = new FormData();
     upload.append("file", fileObject);
 
-    fetch("http://localhost:3001/upload/" + fileObject.name, {
+    fetch("http://localhost:3001/students/upload", {
       method: "POST",
       body: upload,
     });

@@ -4,7 +4,7 @@ import Sidebar from "./components/sidebar";
 import ClassManager from "./pages/ClassManager";
 import Dashboard from "./pages/Dashboard";
 import ExamManager from "./pages/ExamManager";
-import WaitingScreen from "./pages/WatingScreen";
+import WaitingScreen from "./pages/WaitingScreen";
 // import Exam from "./pages/Exam";
 import StudentManager from "./pages/StudentManager";
 
