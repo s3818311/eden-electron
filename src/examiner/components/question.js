@@ -26,7 +26,7 @@ const Question = (props) => {
   };
 
   const cancelModified = () => {
-    location.reload();
+    // location.reload();
   };
 
   //check if user added new options

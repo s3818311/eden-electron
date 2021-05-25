@@ -23,7 +23,7 @@ const ClassManager = () => {
     });
   };
 
-  const renderClasses = () => {
+  const RenderClasses = () => {
     const { isLoading, data } = useFetch("http://localhost:3001/classes");
 
     return isLoading
@@ -60,7 +60,7 @@ const ClassManager = () => {
         </div>
 
         <div className="flex flex-row flex-wrap content-start justify-around h-full overflow-y-scroll">
-          { renderClasses() }
+          { RenderClasses() }
         </div>
 
         { renderModal() }
