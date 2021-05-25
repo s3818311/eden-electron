@@ -16,7 +16,7 @@ function importBuildTarget() {
 
 // Import the entry point and render it's default export
 importBuildTarget().then(({ default: Environment }) =>
-// eslint-disable-next-line react/no-render-return-value
+  // eslint-disable-next-line react/no-render-return-value
   ReactDOM.render(
     <React.StrictMode>
       <Environment />
