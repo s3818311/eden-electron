@@ -7,6 +7,8 @@ import ExamManager from "./pages/ExamManager";
 import WaitingScreen from "./pages/WaitingScreen";
 // import Exam from "./pages/Exam";
 import StudentManager from "./pages/StudentManager";
+import Landing from "./pages/Landing";
+
 
 // import { NavItems } from "./NavItems";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
@@ -17,6 +19,13 @@ const App = () => {
     <>
       <BrowserRouter>
         <Switch>
+
+          <Route exact path="/" render={() => (
+            <>
+              <Landing />
+            </>
+          )}
+          />
 
           <Route exact path="/dashboard" render={() => (
             <>

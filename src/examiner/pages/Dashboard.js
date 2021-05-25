@@ -144,7 +144,7 @@ const deleteClass = (formData) => {
   });
 };
 
-const renderClasses = () => {
+const RenderClasses = () => {
   const { isLoading, data } = useFetch("http://localhost:3001/classes");
 
   return isLoading ? (
@@ -196,7 +196,7 @@ const Dashboard = () => {
       <div className="flex flex-grow overflow-auto">
         <div className="flex flex-row flex-wrap content-start w-2/3 h-full">
           {/* <Booklist></Booklist> */}
-          {renderClasses()}
+          {RenderClasses()}
         </div>
         <div className="sticky top-0 flex flex-row flex-wrap content-start w-1/2 h-full">
           <Recipes />

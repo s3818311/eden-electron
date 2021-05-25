@@ -26,7 +26,7 @@ const Question = (props) => {
   };
 
   const cancelModified = () => {
-    location.reload();
+    // location.reload();
   };
 
   //check if user added new options
@@ -130,15 +130,21 @@ const Question = (props) => {
           {newOptions ? (
             newOptionForm()
           ) : (
-            <div className="pt-5">
+            <div className="pt-5 grid grid-cols">
               <button
-                className="p-1 px-3 ml-10 border border-gray-400 rounded-md hover:bg-gray-200 focus:outline-nones"
+                className="p-1 px-3 ml-10 border border-gray-400 rounded-md hover:bg-gray-200 focus:outline-nones justify-self-start"
                 onClick={toggleNewOption}
               >
                 + Add option
               </button>
+
+              <div
+              className="inline-block px-3 py-1 text-white cursor-pointer rounded-md bg-rmit-red justify-self-end">
+                Delete Question
+              </div>
             </div>
           )}
+
 
           {isModified && (
             <div className="flex justify-end w-full py-5">

@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "concurrently \"npm:start:server\" \"npm:start:craco\"",
-    "run-electron": "concurrently \"BROWSER=none npm start\"  \"wait-on http://localhost:3000/dashboard && electron .\"",
+    "run-electron": "concurrently \"BROWSER=none npm start\"  \"wait-on http://localhost:3000 && electron .\"",
     "build": "craco build",
     "test": "craco test",
     "postcss:examiner": "npx postcss src/examiner/App.css -o src/examiner/tailwind.css",
@@ -12,7 +12,6 @@
     "start:server": "npx nodemon --trace-warnings src/examiner/processes/server.js",
     "start:craco": "craco start"
   },
-  "homepage": "/dashboard",
   "proxy": "http://localhost:3001",
   "eslintConfig": {
     "extends": [
