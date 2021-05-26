@@ -31,9 +31,6 @@ const AddQuestionCard = (props) => {
   };
 
   const submitQuestion = async (formData) => {
-    // console.log(formData);
-    let questionId = null;
-
     await fetch("http://localhost:3001/questions", {
       method: "POST",
       body: JSON.stringify({
@@ -46,19 +43,19 @@ const AddQuestionCard = (props) => {
       },
     })
       .then((res) => res.json())
-      .then((res) => (questionId = res));
-
-    fetch("http://localhost:3001/answers", {
-      method: "POST",
-      body: JSON.stringify({
-        options: formData.options,
-        correctOptionId: currentAnswer,
-        questionId: questionId,
-      }),
-      headers: {
-        "Content-type": "application/json",
-      },
-    });
+      .then((res) => {
+        fetch("http://localhost:3001/answers", {
+          method: "POST",
+          body: JSON.stringify({
+            options: formData.options,
+            correctOptionId: currentAnswer,
+            questionId: res,
+          }),
+          headers: {
+            "Content-type": "application/json",
+          },
+        });
+      });
   };
 
   return (
