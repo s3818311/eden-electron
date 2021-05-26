@@ -22,8 +22,8 @@ const upload = async (req, res) => {
   const convertInfoArrayToObj = (array) =>{
     const keyValueArray = [];
     // keyValueArray.push(["id", array[0]]);
-    keyValueArray.push(["name", array[1]]);
-    keyValueArray.push(["dob", array[2]]);
+    keyValueArray.push(["name", array[0]]);
+    keyValueArray.push(["dob", array[1]]);
 
     return Object.fromEntries(keyValueArray);
   };
