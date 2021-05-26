@@ -1,15 +1,3 @@
-// import "reflect-metadata";
-// import { createConnection } from "typeorm";
-// import express, { Request, Response } from "express";
-// import cors from "cors";
-// import { AppRoutes } from "./appRoutes";
-
-// require("reflect-metadata");
-// const { createConnection } = require("typeorm");
-// const { AppRoutes } = require("./appRoutes");
-// const cors = require("cors");
-// const app = require("express");
-
 const app = require("./express/app");
 const sequelize = require("./sequelize");
 
@@ -31,10 +19,10 @@ const assertDatabaseConnectionOk = async () => {
 const init = async () => {
   await assertDatabaseConnectionOk();
 
-  console.log(`Starting Sequelize + Express example on port ${PORT}...`);
+  console.log(`Starting Sequelize + Express on port ${PORT}...`);
 
   app.listen(PORT, () => {
-    console.log(`Express server started on port ${PORT}. Try some routes, such as '/api/users'.`);
+    console.log(`Express server started on port ${PORT}`);
   });
 };
 

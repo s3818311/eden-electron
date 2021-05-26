@@ -3,15 +3,13 @@ import "tailwindcss/tailwind.css";
 import Sidebar from "./components/sidebar";
 import ClassManager from "./pages/ClassManager";
 import Dashboard from "./pages/Dashboard";
-import ExamManager from "./pages/ExamManager";
 import WaitingScreen from "./pages/WaitingScreen";
 import StudentManager from "./pages/StudentManager";
-
 import RedirectPage from "./pages/RedirectPage";
-
-// import { NavItems } from "./NavItems";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Class from "./pages/Class";
+// import { NavItems } from "./NavItems";
+// import ExamManager from "./pages/ExamManager";
 // import { NavItems } from "./NavItems";
 // import Exam from "./pages/Exam";
 
@@ -20,12 +18,14 @@ const App = () => {
     <>
       <BrowserRouter>
         <Switch>
-
-          <Route exact path="/" render={() => (
-            <>
-              <RedirectPage />
-            </>
-          )}
+          <Route
+            exact
+            path="/"
+            render={() => (
+              <>
+                <RedirectPage />
+              </>
+            )}
           />
 
           <Route
@@ -38,8 +38,6 @@ const App = () => {
               </>
             )}
           />
-
-
 
           <Route
             path="/class/:id/:tab(exam|students|result|questions)"
@@ -61,7 +59,7 @@ const App = () => {
               </>
             )}
           />
-
+          {/*
           <Route
             exact
             path="/exam"
@@ -71,7 +69,7 @@ const App = () => {
                 <ExamManager />
               </>
             )}
-          />
+          /> */}
 
           {/* <Route exact path="/exam/:exam" render={({ match }) => (
             <>
