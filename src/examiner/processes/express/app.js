@@ -4,7 +4,6 @@ const cors = require("cors");
 const multer = require("multer");
 const upload = multer({ dest: "tmp/csv/" });
 
-
 const routes = {
   classes: require("./routes/classRoutes"),
   exams: require("./routes/examRoutes"),
@@ -33,7 +32,8 @@ const makeHandlerAwareOfAsyncErrors = (handler) => {
 for (const [routeName, routeController] of Object.entries(routes)) {
   if (routeController.upload) {
     app.post(
-      `/${routeName}/upload`, upload.single("file"),
+      `/${routeName}/upload`,
+      upload.single("file"),
       makeHandlerAwareOfAsyncErrors(routeController.upload)
     );
   }
@@ -89,7 +89,7 @@ for (const [routeName, routeController] of Object.entries(routes)) {
 
   if (routeController.getStudentsByClassId) {
     app.get(
-      `/${routeName}/:id`,
+      `/${routeName}/classId/:id`,
       makeHandlerAwareOfAsyncErrors(routeController.getStudentsByClassId)
     );
   }
@@ -112,6 +112,13 @@ for (const [routeName, routeController] of Object.entries(routes)) {
     app.get(
       `/${routeName}/:examId/:studentId`,
       makeHandlerAwareOfAsyncErrors(routeController.getByExamAndStudentId)
+    );
+  }
+
+  if (routeController.getAttendingStudents) {
+    app.get(
+      `/${routeName}/:examId`,
+      makeHandlerAwareOfAsyncErrors(routeController.getAttendingStudents)
     );
   }
 }

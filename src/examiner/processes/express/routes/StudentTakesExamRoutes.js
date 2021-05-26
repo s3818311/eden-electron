@@ -1,9 +1,41 @@
 /* eslint-disable no-unused-vars */
 const { models } = require("../../sequelize");
+const { Op } = require("sequelize");
 
 const getAll = async (req, res) => {
   const rows = await models.StudentTakesExam.findAll();
   res.status(200).json(rows);
+};
+
+const getAttendingStudents = async (req, res) => {
+  const examId = Number.parseInt(req.params.examId, 10);
+  const rows = await models.StudentTakesExam.findAll({
+    where: {
+      examModelId: examId,
+    },
+    attributes: ["studentModelId", "status"],
+  });
+
+  const studentIds = rows.map((obj) => obj.studentModelId);
+  const objs = rows.map((obj) => {
+    return {
+      studentId: obj.studentModelId,
+      status: obj.status,
+    };
+  });
+
+  const students = await models.studentModel.findAll({
+    where: {
+      id: studentIds,
+    },
+    attributes: ["id", "name"],
+  });
+
+  students.forEach((studentObj) => {
+    objs.find((o) => o.studentId === studentObj.id).name = studentObj.name;
+  });
+
+  res.status(200).json(objs);
 };
 
 const getByExamAndStudentId = async (req, res) => {
@@ -33,6 +65,7 @@ const create = async (req, res) => {
       },
       defaults: {
         mark: attendingIds.includes(studentId) ? 0 : null,
+        status: "NONE",
       },
     });
 
@@ -44,8 +77,8 @@ const create = async (req, res) => {
   existedRows.length == 0
     ? res.status(201).end()
     : res
-      .status(400)
-      .send(`Student(s) with id ${existedRows} already took this exam`);
+        .status(400)
+        .send(`Student(s) with id ${existedRows} already took this exam`);
 };
 
 const setMark = async (req, res) => {
@@ -62,4 +95,23 @@ const setMark = async (req, res) => {
   res.status(200).end();
 };
 
-module.exports = { getAll, getByExamAndStudentId, create, setMark };
+const setStatus = async (req, res) => {
+  await models.StudentTakesExam.update(
+    { status: req.body.status },
+    {
+      where: {
+        studentModelId: req.body.studentModelId,
+        examModelId: req.body.examModelId,
+      },
+    }
+  );
+};
+
+module.exports = {
+  getAll,
+  getAttendingStudents,
+  getByExamAndStudentId,
+  create,
+  setMark,
+  setStatus,
+};
