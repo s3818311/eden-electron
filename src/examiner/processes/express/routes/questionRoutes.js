@@ -35,4 +35,8 @@ const remove = async (req, res) => {
   res.status(200).end();
 };
 
+// const update = async (req, res) => {
+//   const
+// }
+
 module.exports = { getByClassId, create, remove };

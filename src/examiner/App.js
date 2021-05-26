@@ -5,57 +5,61 @@ import ClassManager from "./pages/ClassManager";
 import Dashboard from "./pages/Dashboard";
 import ExamManager from "./pages/ExamManager";
 import WaitingScreen from "./pages/WaitingScreen";
-// import Exam from "./pages/Exam";
 import StudentManager from "./pages/StudentManager";
-import Landing from "./pages/Landing";
-
-
-// import { NavItems } from "./NavItems";
+// import Landing from "./pages/Landing";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Class from "./pages/Class";
+// import { NavItems } from "./NavItems";
+// import Exam from "./pages/Exam";
 
 const App = () => {
   return (
     <>
       <BrowserRouter>
         <Switch>
+          <Route exact path="/" render={() => <>{/* <Landing /> */}</>} />
 
-          <Route exact path="/" render={() => (
-            <>
-              <Landing />
-            </>
-          )}
+          <Route
+            exact
+            path="/dashboard"
+            render={() => (
+              <>
+                <Sidebar />
+                <Dashboard />
+              </>
+            )}
           />
 
-          <Route exact path="/dashboard" render={() => (
-            <>
-              <Sidebar />
-              <Dashboard />
-            </>
-          )}
+          <Route
+            path="/class/:id/:tab(exam|students|result|questions)"
+            render={({ match }) => (
+              <>
+                <Sidebar />
+                <Class tabName={match.params.tab} classId={match.params.id} />
+              </>
+            )}
           />
 
-          <Route path="/class/:id/:tab(exam|students|result|questions)" render={({ match }) => (
-            <>
-              <Sidebar />
-              <Class tabName={match.params.tab} classId={match.params.id} />
-            </>
-          )}
+          <Route
+            exact
+            path="/class"
+            render={() => (
+              <>
+                <Sidebar />
+                <ClassManager />
+              </>
+            )}
           />
 
-          <Route exact path="/class" render={() => (
-            <>
-              <Sidebar />
-              <ClassManager />
-            </>
-          )}
-          />
-
-          <Route exact path="/exam" render={() => (
-            <>
-              <Sidebar />
-              <ExamManager />
-            </>)}
+          <Route
+            exact
+            path="/exam"
+            render={() => (
+              <>
+                <Sidebar />
+                <ExamManager />
+              </>
+            )}
           />
 
           {/* <Route exact path="/exam/:exam" render={({ match }) => (
@@ -67,14 +71,16 @@ const App = () => {
 
           <Route exact path="/test" render={() => <WaitingScreen />} />
 
-          <Route exact path="/students" render={() =>(
-            <>
-              <Sidebar />
-              <StudentManager />
-            </>
-          )}
+          <Route
+            exact
+            path="/students"
+            render={() => (
+              <>
+                <Sidebar />
+                <StudentManager />
+              </>
+            )}
           />
-
         </Switch>
       </BrowserRouter>
     </>

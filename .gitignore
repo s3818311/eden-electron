@@ -25,6 +25,4 @@ yarn-error.log*
 # custom
 src/**/tailwind.css
 .vscode
-
-# exclude all examiner related
-src/examiner/**
+*.sqlite3
