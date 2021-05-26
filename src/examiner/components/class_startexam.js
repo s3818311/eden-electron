@@ -8,7 +8,7 @@ const StartExam = (props) => {
   const { register, watch, handleSubmit } = useForm();
 
   const studentsInClass = useFetch(
-    "http://localhost:3001/studentInClass/" + props.classId
+    "http://localhost:3001/studentInClass/classId/" + props.classId
   );
 
   const timeLimit = watch("hasTimeLimit");
@@ -49,7 +49,6 @@ const StartExam = (props) => {
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
         fetch("http://localhost:3001/studentTakesExam", {
           method: "POST",
           body: JSON.stringify({
@@ -60,8 +59,12 @@ const StartExam = (props) => {
           headers: {
             "Content-type": "application/json",
           },
+        }).then(() => {
+          window.location.href = `http://localhost:3000/test?examId=${res}`;
         });
       });
+
+    return false;
   };
 
   return (
