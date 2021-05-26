@@ -38,8 +38,8 @@ const App = () => {
               </>
             )}
           />
-            
-          
+
+
 
           <Route
             path="/class/:id/:tab(exam|students|result|questions)"

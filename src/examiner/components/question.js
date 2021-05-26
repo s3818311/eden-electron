@@ -42,8 +42,31 @@ const Question = (props) => {
     updateNewOptions(!newOptions);
   };
 
-  const optionFormSubmit = (formData) => {
+  const optionFormSubmit = async (formData) => {
+    let optionId = null;
+
     console.log(formData);
+
+    await fetch("http://localhost:3001/answers/addOption", {
+      method: "POST",
+      body: JSON.stringify({
+        questionId: formData.questionId,
+        title: formData.optionName
+      }),
+      headers: {
+        "Content-type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => (optionId = res));
+
+  };
+
+  const deleteOption = (evt) =>{
+    evt.preventDefault();
+    fetch("http://localhost:3001/answers/" + evt.target[0].value, {
+      method: "DELETE",
+    });
   };
 
   const questionFormSubmit = (formData) => {};
@@ -65,6 +88,7 @@ const Question = (props) => {
               isSelected={false}
               optionId={99}
             />
+            <input type="hidden" value={props.questionObj.id} {...register("questionId")} />
             <input
               type="text"
               className="inline-block w-2/3 ml-10 border-b-2 focus:border-blue-400 focus:outline-none"
@@ -96,14 +120,17 @@ const Question = (props) => {
     <div className="p-4 pb-0">
       <div className="flex flex-wrap content-start p-6 pb-2 mx-auto bg-white border-2 border-gray-400 rounded-lg">
         <div className="flex items-center w-full pb-3 border-b-2 border-gray-400 h-1/6 grid grid-cols-2">
-          <form onSubmit={handleSubmit(questionFormSubmit)}>
+          {/* <form onSubmit={handleSubmit(questionFormSubmit)}>
             <input
               className="w-auto text-2xl text-left border-b-2 text-rmit-blue placeholder-rmit-blue focus:border-blue-400 focus:outline-none"
               type="text"
               {...register("questionTitle")}
               onChange={() => setModified(true)}
             />
-          </form>
+          </form> */}
+          <div className="w-auto text-2xl text-left border-b-2 text-rmit-blue">
+            {props.questionObj.title}
+          </div>
 
           <div
             className={`px-6 py-3 text-white  rounded-full place-self-end 
@@ -121,6 +148,7 @@ const Question = (props) => {
             <Loading />
           ) : (
             optionList.data.map((item, index) => {
+              console.log(item.isCorrectAnswer);
               return (
                 <div key={index} className="py-1 transition-all">
                   <div className="flex items-center">
@@ -129,23 +157,29 @@ const Question = (props) => {
                       toggleCheckBtn={selectOption}
                       optionId={item.id}
                     />
-                    <input
+                    {/* <input
                       type="text"
                       className="inline-block w-2/3 ml-10 border-b-2 focus:border-blue-400 focus:outline-none"
                       placeholder={item.title}
                       onChange={() => setModified(true)}
-                    />
+                    /> */}
+                    <div className="inline-block w-2/3 ml-10">
+                      {item.title}
+                    </div>
                     <div className="flex items-center flex-grow grid">
-                      <input
-                        type="hidden"
-                        {...register("deleteOption")}
-                      ></input>
-                      <button
-                        className="text-red-500 cursor-pointer place-self-end"
-                        type="submit"
-                      >
-                        <AiFillDelete />
-                      </button>
+                      <form onSubmit={deleteOption}>
+                        <input
+                          type="hidden"
+                          value={item.id}
+                        ></input>
+                        <button
+                          className="text-red-500 cursor-pointer place-self-end"
+                          type="submit"
+                        >
+                          <AiFillDelete />
+                        </button>
+                      </form>
+
                     </div>
                   </div>
                 </div>

@@ -45,6 +45,13 @@ for (const [routeName, routeController] of Object.entries(routes)) {
     );
   }
 
+  if (routeController.addOption) {
+    app.post(
+      `/${routeName}/addOption`,
+      makeHandlerAwareOfAsyncErrors(routeController.addOption)
+    );
+  }
+
   if (routeController.getAll) {
     app.get(
       `/${routeName}`,
