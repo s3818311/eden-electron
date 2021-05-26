@@ -16,7 +16,6 @@ const StartExam = (props) => {
   const showParticipant = watch("participant", "all");
 
   const startExam = async (formData) => {
-    let examId = null;
     let attending = [];
     const studentIds = studentsInClass.data.map((student) => student.id);
 
@@ -41,7 +40,7 @@ const StartExam = (props) => {
       classModelId: props.classId,
     });
 
-    await fetch("http://localhost:3001/exams", {
+    fetch("http://localhost:3001/exams", {
       method: "POST",
       body: examObj,
       headers: {
@@ -51,22 +50,18 @@ const StartExam = (props) => {
       .then((res) => res.json())
       .then((res) => {
         console.log(res);
-        examId = res;
+        fetch("http://localhost:3001/studentTakesExam", {
+          method: "POST",
+          body: JSON.stringify({
+            examModelId: res,
+            studentIds: studentIds,
+            attendingIds: attending,
+          }),
+          headers: {
+            "Content-type": "application/json",
+          },
+        });
       });
-
-    await fetch("http://localhost:3001/studentTakesExam", {
-      method: "POST",
-      body: JSON.stringify({
-        examModelId: examId,
-        studentIds: studentIds,
-        attendingIds: attending,
-      }),
-      headers: {
-        "Content-type": "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .then((res) => console.log(res));
   };
 
   return (
