@@ -6,7 +6,10 @@ import Dashboard from "./pages/Dashboard";
 import ExamManager from "./pages/ExamManager";
 import WaitingScreen from "./pages/WaitingScreen";
 import StudentManager from "./pages/StudentManager";
-// import Landing from "./pages/Landing";
+
+import RedirectPage from "./pages/RedirectPage";
+
+// import { NavItems } from "./NavItems";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Class from "./pages/Class";
 // import { NavItems } from "./NavItems";
@@ -17,7 +20,13 @@ const App = () => {
     <>
       <BrowserRouter>
         <Switch>
-          <Route exact path="/" render={() => <>{/* <Landing /> */}</>} />
+
+          <Route exact path="/" render={() => (
+            <>
+              <RedirectPage />
+            </>
+          )}
+          />
 
           <Route
             exact
@@ -29,6 +38,8 @@ const App = () => {
               </>
             )}
           />
+            
+          
 
           <Route
             path="/class/:id/:tab(exam|students|result|questions)"
