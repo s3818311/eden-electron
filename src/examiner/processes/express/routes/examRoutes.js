@@ -5,6 +5,13 @@ const getAll = async (req, res) => {
   res.status(200).json(classes);
 };
 
+const getById = async (req, res) => {
+  const id = Number.parseInt(req.params.id, 10);
+  const exam = await models.examModel.findByPk(id);
+
+  res.status(200).json(exam);
+};
+
 const getByClassId = async (req, res) => {
   const classId = Number.parseInt(req.params.id, 10);
   const exams = await models.examModel.findAll({
@@ -31,4 +38,4 @@ const remove = async (req, res) => {
   res.status(200).end();
 };
 
-module.exports = { getAll, getByClassId, create, remove };
+module.exports = { getAll, getById, getByClassId, create, remove };
