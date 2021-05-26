@@ -7,7 +7,7 @@ import { AiFillDelete } from "react-icons/ai";
 
 const Students = (props) => {
   const studentList = useFetch(
-    "http://localhost:3001/studentInClass/" + props.classId
+    "http://localhost:3001/studentInClass/classId/" + props.classId
   );
 
   const deleteStudent = (evt) => {
