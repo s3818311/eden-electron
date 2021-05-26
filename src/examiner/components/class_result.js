@@ -6,7 +6,6 @@ import Loading from "./loading";
 
 const Exams = (props) => {
   if (props.exams.data.length != 0) {
-    props.setHasData(true);
     return props.exams.data.map((exam, index) => (
       <th key={index} className="sticky top-0 py-2 bg-blue-200">
         {exam.title}
@@ -44,14 +43,12 @@ const Results = (props) => {
 };
 
 const Result = (props) => {
-  const [hasData, setHasData] = useState(false);
-
   const exams = useFetch(
     "http://localhost:3001/exams/classId/" + props.classId
   );
 
   const students = useFetch(
-    "http://localhost:3001/studentInClass/" + props.classId
+    "http://localhost:3001/studentInClass/classId/" + props.classId
   );
 
   const studentTakesExam = useFetch("http://localhost:3001/studentTakesExam");
@@ -62,9 +59,7 @@ const Result = (props) => {
         examModelId === eid && studentModelId === sid
     );
 
-    if (row === undefined) return null;
-
-    return row.mark;
+    return row === undefined ? null : row.mark;
   };
 
   return (
@@ -75,41 +70,35 @@ const Result = (props) => {
         </div>
       </div> */}
 
-      {exams.isLoading ||
-        students.isLoading ||
-        (studentTakesExam.isLoading ? (
-          <Loading />
-        ) : (
-          <>
-            <table className="w-full table-auto">
-              <thead>
-                <tr className="text-rmit-blue">
-                  <th className="sticky top-0 py-2 bg-blue-200">ID</th>
-                  <th className="sticky top-0 py-2 bg-blue-200">Name</th>
-                  <Exams exams={exams} setHasData={setHasData} />
+      {exams.isLoading || students.isLoading || studentTakesExam.isLoading ? (
+        <Loading />
+      ) : (
+        <>
+          <table className="w-full table-auto">
+            <thead>
+              <tr className="text-rmit-blue">
+                <th className="sticky top-0 py-2 bg-blue-200">ID</th>
+                <th className="sticky top-0 py-2 bg-blue-200">Name</th>
+                <Exams exams={exams} />
+              </tr>
+            </thead>
+            <tbody>
+              {exams.data.length != 0 ? (
+                <Results students={students} exams={exams} getMark={getMark} />
+              ) : (
+                <tr>
+                  <td colSpan="2" className="text-center">
+                    No results recorded
+                  </td>
                 </tr>
-              </thead>
-              <tbody>
-                {hasData ? (
-                  <Results
-                    students={students}
-                    exams={exams}
-                    getMark={getMark}
-                  />
-                ) : (
-                  <tr>
-                    <td colSpan="2" className="text-center">
-                      No results recorded
-                    </td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
-            <div className="pt-5 text-xs text-gray-400">
-              * DNA: Did not attend
-            </div>
-          </>
-        ))}
+              )}
+            </tbody>
+          </table>
+          <div className="pt-5 text-xs text-gray-400">
+            * DNA: Did not attend
+          </div>
+        </>
+      )}
     </>
   );
 };
