@@ -11,8 +11,8 @@ const getByQuestionId = async (req, res) => {
 };
 
 const create = async (req, res) => {
-  const questionId = req.body.questionId;
-  const correctId = req.body.correctOptionId;
+  const questionId = Number.parseInt(req.body.questionId, 10) ;
+  const correctId = Number.parseInt(req.body.correctOptionId, 10);
 
   await req.body.options.reduce(async (memo, title, index) => {
     await memo;
