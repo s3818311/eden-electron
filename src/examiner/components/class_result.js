@@ -13,6 +13,7 @@ const Exams = (props) => {
       </th>
     ));
   }
+  return null;
 };
 
 const ExamMarks = (props) => {

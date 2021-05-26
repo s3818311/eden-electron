@@ -27,6 +27,19 @@ const create = async (req, res) => {
   res.status(201).end();
 };
 
+const addOption = async (req, res) => {
+  const questionId = Number.parseInt(req.body.questionId, 10);
+
+  const answerObj = {
+    title: req.body.title,
+    isCorrectAnswer: false,
+    questionModelId: questionId,
+  };
+  await models.answerModel.create(answerObj);
+
+  res.status(201).end();
+};
+
 const remove = async (req, res) => {
   const id = Number.parseInt(req.params.id, 10);
 
@@ -39,4 +52,4 @@ const remove = async (req, res) => {
   res.status(200).end();
 };
 
-module.exports = { getByQuestionId, create, remove };
+module.exports = { getByQuestionId, create, remove, addOption };
