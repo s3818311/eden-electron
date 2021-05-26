@@ -28,6 +28,10 @@ const applyAssociations = (sequelize) => {
       type: DataTypes.INTEGER,
       allowNull: true,
     },
+    status: {
+      type: DataTypes.STRING,
+      isIn: [["WAITING", "TAKING", "SUBMITTED", "NONE"]],
+    },
   });
 
   examModel.belongsToMany(studentModel, { through: StudentTakesExam });
