@@ -49,6 +49,7 @@ const StartExam = (props) => {
     })
       .then((res) => res.json())
       .then((res) => {
+        const examId = res;
         fetch("http://localhost:3001/studentTakesExam", {
           method: "POST",
           body: JSON.stringify({
@@ -59,8 +60,10 @@ const StartExam = (props) => {
           headers: {
             "Content-type": "application/json",
           },
-        }).then(() => {
-          window.location.href = `http://localhost:3000/test?examId=${res}`;
+        }).then((res) => {
+          console.log(res);
+          console.log(examId);
+          window.location.href = `http://localhost:3000/test?examId=${examId}`;
         });
       });
 

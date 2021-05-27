@@ -77,8 +77,8 @@ const create = async (req, res) => {
   existedRows.length == 0
     ? res.status(201).end()
     : res
-        .status(400)
-        .send(`Student(s) with id ${existedRows} already took this exam`);
+      .status(400)
+      .send(`Student(s) with id ${existedRows} already took this exam`);
 };
 
 const setMark = async (req, res) => {

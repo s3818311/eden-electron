@@ -17,8 +17,8 @@ const StudentList = (props) => {
           student.status === "NONE"
             ? "bg-gray-100"
             : student.status === "WAITING"
-            ? "bg-yellow-200"
-            : ""
+              ? "bg-yellow-200"
+              : ""
         }`}
       >
         <div className="inline-block w-1/2">{student.name}</div>
@@ -26,8 +26,8 @@ const StudentList = (props) => {
           {student.status === "NONE"
             ? "Not entered"
             : student.status === "WAITING"
-            ? "Waiting"
-            : ""}
+              ? "Waiting"
+              : ""}
         </div>
       </div>
     </div>
@@ -44,6 +44,8 @@ const WaitingScreen = () => {
 
   const checkAllJoined = () => {
     if (attendingStudents.isLoading) return false;
+
+    console.log(attendingStudents.data);
 
     let allJoined = true;
     attendingStudents.data.forEach((obj) => {
