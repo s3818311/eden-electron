@@ -42,6 +42,16 @@ const Results = (props) => {
   ));
 };
 
+const NoRecords = () => {
+  return (
+    <tr>
+      <td colSpan="2" className="text-center">
+        No results recorded
+      </td>
+    </tr>
+  );
+};
+
 const Result = (props) => {
   const exams = useFetch(
     "http://localhost:3001/exams/classId/" + props.classId
@@ -79,18 +89,22 @@ const Result = (props) => {
               <tr className="text-rmit-blue">
                 <th className="sticky top-0 py-2 bg-blue-200">ID</th>
                 <th className="sticky top-0 py-2 bg-blue-200">Name</th>
-                <Exams exams={exams} />
+                {exams.data !== undefined && <Exams exams={exams} />}
               </tr>
             </thead>
             <tbody>
-              {exams.data.length != 0 ? (
-                <Results students={students} exams={exams} getMark={getMark} />
+              {exams.data !== undefined ? (
+                exams.data.length != 0 ? (
+                  <Results
+                    students={students}
+                    exams={exams}
+                    getMark={getMark}
+                  />
+                ) : (
+                  <NoRecords />
+                )
               ) : (
-                <tr>
-                  <td colSpan="2" className="text-center">
-                    No results recorded
-                  </td>
-                </tr>
+                <NoRecords />
               )}
             </tbody>
           </table>
