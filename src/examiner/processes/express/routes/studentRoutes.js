@@ -7,6 +7,16 @@ const getAll = async (req, res) => {
   res.status(200).json(students);
 };
 
+const getById = async (req, res) => {
+  const id = Number.parseInt(req.params.id, 10);
+  const classObj = await models.studentModel.findByPk(id);
+  if (classObj) {
+    res.status(200).json(classObj);
+  } else {
+    res.status(404).send("Student not found");
+  }
+};
+
 const create = async (req, res) => {
   if (Array.isArray(req.body)) {
     req.body.map(async (obj) => await models.studentModel.create(obj));
@@ -58,4 +68,4 @@ const remove = async (req, res) => {
   res.status(200).end();
 };
 
-module.exports = { getAll, create, remove, upload };
+module.exports = { getAll, getById, create, remove, upload };

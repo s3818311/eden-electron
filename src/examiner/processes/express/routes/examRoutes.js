@@ -1,8 +1,8 @@
 const { models } = require("../../sequelize");
 
 const getAll = async (req, res) => {
-  const classes = await models.examModel.findAll();
-  res.status(200).json(classes);
+  const exams = await models.examModel.findAll();
+  res.status(200).json(exams);
 };
 
 const getById = async (req, res) => {
@@ -22,6 +22,16 @@ const getByClassId = async (req, res) => {
   res.status(200).json(exams);
 };
 
+const getLaunchedExam = async (req, res) => {
+  const exam = await models.examModel.findOne({
+    where: {
+      status: "LAUNCHED",
+    },
+  });
+
+  res.status(200).json(exam);
+};
+
 const create = async (req, res) => {
   const exam = await models.examModel.create(req.body);
 
@@ -38,4 +48,11 @@ const remove = async (req, res) => {
   res.status(200).end();
 };
 
-module.exports = { getAll, getById, getByClassId, create, remove };
+module.exports = {
+  getAll,
+  getById,
+  getByClassId,
+  getLaunchedExam,
+  create,
+  remove,
+};
