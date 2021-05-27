@@ -96,6 +96,7 @@ const setMark = async (req, res) => {
 };
 
 const setStatus = async (req, res) => {
+  console.log(req.body);
   await models.StudentTakesExam.update(
     { status: req.body.status },
     {
@@ -105,6 +106,8 @@ const setStatus = async (req, res) => {
       },
     }
   );
+
+  res.status(200).end();
 };
 
 module.exports = {
