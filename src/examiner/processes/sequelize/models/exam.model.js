@@ -8,6 +8,11 @@ module.exports = (sequelize) => {
       primaryKey: true,
       type: DataTypes.INTEGER,
     },
+    status: {
+      allowNull: false,
+      type: DataTypes.STRING,
+      isIn: [["NONE", "LAUNCHED"]],
+    },
     title: {
       allowNull: false,
       type: DataTypes.STRING,
