@@ -11,7 +11,7 @@ module.exports = (sequelize) => {
     status: {
       allowNull: false,
       type: DataTypes.STRING,
-      isIn: [["NONE", "LAUNCHED"]],
+      isIn: [["NONE", "LAUNCHED", "IN_SESSION"]],
     },
     title: {
       allowNull: false,
