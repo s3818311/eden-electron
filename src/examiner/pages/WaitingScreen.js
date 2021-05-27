@@ -36,7 +36,8 @@ const StudentList = (props) => {
 
 const WaitingScreen = () => {
   const attendingStudents = useFetch(
-    "http://localhost:3001/studentTakesExam/" + getExamId()
+    "http://localhost:3001/studentTakesExam/student/get/attending/exam/" +
+      getExamId()
   );
 
   const exam = useFetch("http://localhost:3001/exams/" + getExamId());
