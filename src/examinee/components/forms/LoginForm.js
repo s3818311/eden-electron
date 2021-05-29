@@ -12,14 +12,14 @@ const LoginFormComponent = () => {
   const onSubmit = async () => {
     await fetch("http://localhost:3000/login");
     // navigate here
-    document.location = "/personal";
+    document.location = "/instruction";
   };
   return (
     <form
-      className="w-full h-1/3 grid gap-y-8"
+      className="flex flex-col items-center justify-center w-full h-screen gap-y-8"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <div className="h-20 px-60 ">
+      <div className="w-full h-20 px-60">
         <div className="flex items-center w-full h-full rounded-sm bg-rmit-blue">
           <div className="mx-auto text-2xl text-center text-white">
             Title of Examination
