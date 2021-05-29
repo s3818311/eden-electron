@@ -5,6 +5,7 @@ import Landing from "./views/Landing";
 import LoginView from "./views/LoginView";
 import InstructionView from "./views/InstructionView";
 import QuestionView from "./views/QuestionView";
+import ShowScoreView from "./views/ShowScoreView";
 
 const App = () => (
   <React.Fragment>
@@ -15,6 +16,7 @@ const App = () => (
           <Route path="/login" component={LoginView} />
           <Route path="/instruction" component={InstructionView} />
           <Route path="/question" component={QuestionView} />
+          <Route path="/scores" component={ShowScoreView} />
         </Switch>
       </React.Fragment>
     </BrowserRouter>
