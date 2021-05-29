@@ -2,13 +2,13 @@ import React from "react";
 
 function Instruction() {
   return (
-    <div className="w-full border-2 border-black mx-auto px-12 py-5 bg-white rounded-lg">
-      <div className="flex items-center border-b-2 h-1/6 w-full pb-5 border-black">
-        <div className="text-3xl text-rmit-blue w-1/3 text-left">
+    <div className="w-full px-12 py-5 mx-auto bg-white border-2 border-black rounded-lg">
+      <div className="flex items-center w-full pb-5 border-b-2 border-black h-1/6">
+        <div className="w-1/3 text-3xl text-left text-rmit-blue">
           Instruction
         </div>
       </div>
-      <ol className="list-decimal text-justify text-2xl px-10 overflow-y-scroll pt-5 ">
+      <ol className="px-10 pt-5 overflow-y-scroll text-2xl text-justify list-decimal">
         <li>
           There are 9 pages and 2 questions in this exam. You must answer both
           questions one and two.

@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 
 function Text(props) {
   return (
-    <div className="flex-grow h-1/4 px-10 pb-10">
-      <div className="flex items-center border-b-2 pt-10 pb-10 border-rmit-red">
+    <div className="flex-grow px-10 pb-10 h-1/4">
+      <div className="flex items-center pt-10 pb-10 border-b-2 border-rmit-red">
         <div
           className={
             props.subTitle
@@ -14,7 +14,7 @@ function Text(props) {
         >
           {props.title}
         </div>
-        <div className="text-3xl text-rmit-blue w-1/3 text-right">
+        <div className="w-1/3 text-3xl text-right text-rmit-blue">
           {props.subTitle}
         </div>
       </div>

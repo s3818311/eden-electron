@@ -3,9 +3,9 @@ import React from "react";
 function MultipleChoice() {
   return (
     <div className="px-10 pb-10">
-      <div className="border-2 border-black mx-auto flex p-6 bg-white rounded-lg flex-wrap content-start ">
-        <div className="flex items-center border-b-2 h-1/6 w-full pb-10 border-black">
-          <div className="text-3xl text-rmit-blue w-1/3 text-left">
+      <div className="flex flex-wrap content-start p-6 mx-auto bg-white border-2 border-black rounded-lg">
+        <div className="flex items-center w-full pb-10 border-b-2 border-black h-1/6">
+          <div className="w-1/3 text-3xl text-left text-rmit-blue">
             Question 1
           </div>
         </div>

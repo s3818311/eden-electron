@@ -1,3 +1,4 @@
+/* eslint-disable tailwind/class-order */
 import React from "react";
 
 const InfoExaminee = () => {

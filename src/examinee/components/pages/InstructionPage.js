@@ -7,27 +7,27 @@ import InfoExaminee from "../text/InfoExaminee";
 const InstructionPage = () => {
   return (
     <div className="flex h-full">
-      <div className="w-full flex justify-center items-center h-full">
-        <div className="w-2/3 px-10 h-full">
-          <div className="h-1/3 flex items-center">
+      <div className="flex items-center justify-center w-full h-full">
+        <div className="w-2/3 h-full px-10">
+          <div className="flex items-center h-1/3">
             <InfoExaminee />
           </div>
-          <div className="h-2/3 flex items-center">
+          <div className="flex items-center h-2/3">
             <Instruction />
           </div>
         </div>
 
-        <div className="w-1/3 flex justify-center h-full px-10 flex-col">
-          <div className="h-1/3 w-full flex items-center">
+        <div className="flex flex-col justify-center w-1/3 h-full px-10">
+          <div className="flex items-center w-full h-1/3">
             <div className="text-2xl">Not your info?</div>
             <button
               type="submit"
-              className="bg-rmit-red hover:bg-rmit-red-bold text-white font-bold focus:border-none px-4 py-2 rounded mx-auto h-12"
+              className="h-12 px-4 py-2 mx-auto font-bold text-white rounded bg-rmit-red hover:bg-rmit-red-bold focus:border-none"
             >
               Go Back
             </button>
           </div>
-          <div className="h-2/3 w-full flex items-center justify-center flex-col">
+          <div className="flex flex-col items-center justify-center w-full h-2/3">
             <Spinner />
             <div className="pt-5">Please wait for other students to join</div>
           </div>

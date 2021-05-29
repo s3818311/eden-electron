@@ -13,10 +13,10 @@ function Announcement() {
   return (
     <>
       {showMessage && <Message />}
-      <div className="fixed right-0 bottom-0 p-8">
-        <GoPrimitiveDot className="text-rmit-red h-6 ml-auto mt-auto absolute right-6 bottom-16" />
+      <div className="fixed bottom-0 right-0 p-8">
+        <GoPrimitiveDot className="absolute h-6 mt-auto ml-auto text-rmit-red right-6 bottom-16" />
         <button
-          className="h-12 w-12 rounded-md text-white bg-rmit-blue text-3xl leading-10 cursor-pointer "
+          className="w-12 h-12 text-3xl text-white cursor-pointer rounded-md bg-rmit-blue leading-10"
           onClick={onButtonClickHandler}
         >
           <FaBars className="mx-auto" />
