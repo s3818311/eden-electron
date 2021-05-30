@@ -1,28 +1,37 @@
 /* eslint-disable tailwind/class-order */
 import React from "react";
+import PropTypes from "prop-types";
 
-const InfoExaminee = () => {
+const InfoExaminee = (props) => {
   return (
-    <div className="w-full border-2 border-black mx-auto px-12 py-5 bg-white rounded-lg text-2xl">
-      <div className="flex items-center border-b-2 h-1/6 w-full pb-5 border-black">
-        <div className="text-3xl text-rmit-blue w-1/3 text-left">
+    <div className="w-full px-12 py-5 mx-auto text-2xl bg-white border-2 border-black rounded-lg">
+      <div className="flex items-center w-full pb-5 border-b-2 border-black h-1/6">
+        <div className="w-1/3 text-3xl text-left text-rmit-blue">
           Examinee Info
         </div>
       </div>
       <div className="pt-5">
-        <div className="text-left w-1/2 inline-block">Student Id</div>
-        <span className="text-right w-1/2 inline-block">s3822042</span>
+        <div className="inline-block w-1/2 text-left">Student Id</div>
+        <span className="inline-block w-1/2 text-right">{props.id}</span>
       </div>
       <div>
-        <div className="text-left w-1/2 inline-block">Name</div>
-        <span className="text-right w-1/2 inline-block">Vo Thanh Luan</span>
+        <div className="inline-block w-1/2 text-left">Name</div>
+        <span className="inline-block w-1/2 text-right">{props.name}</span>
       </div>
       <div>
-        <div className="text-left w-1/2 inline-block">Date of Birth</div>
-        <span className="text-right w-1/2 inline-block">13/12/2001</span>
+        <div className="inline-block w-1/2 text-left">Date of Birth</div>
+        <span className="inline-block w-1/2 text-right">
+          {new Date(props.dob).toLocaleDateString()}
+        </span>
       </div>
     </div>
   );
+};
+
+InfoExaminee.propTypes = {
+  id: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  dob: PropTypes.string.isRequired,
 };
 
 export default InfoExaminee;

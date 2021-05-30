@@ -9,10 +9,10 @@ const LoginFormComponent = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = async () => {
-    await fetch("http://localhost:3000/login");
-    // navigate here
-    document.location = "/instruction";
+  const onSubmit = (formData) => {
+    window.location.href =
+      "http://localhost:3000/instruction?studentId=" + formData.studentId;
+    return false;
   };
   return (
     <form
@@ -34,15 +34,13 @@ const LoginFormComponent = () => {
           Student ID
         </label>
         <input
-          id="studentID"
           className="w-full px-3 py-2 mb-2 text-2xl text-gray-700 border rounded focus:bg-primary"
-          name="studentID"
           type="tel"
-          placeholder="eg.3822042"
-          {...register("studentID", {
+          placeholder="eg. 3822042"
+          {...register("studentId", {
             required: true,
             pattern: {
-              value: /^[0-9]{7}$/,
+              value: /^[0-9]*$/,
             },
           })}
         />
