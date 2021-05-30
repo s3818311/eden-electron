@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const express = require("express");
 const cors = require("cors");
 
@@ -18,6 +19,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 const makeHandlerAwareOfAsyncErrors = (handler) => {
   return async (req, res, next) => {
@@ -30,6 +32,13 @@ const makeHandlerAwareOfAsyncErrors = (handler) => {
 };
 
 for (const [routeName, routeController] of Object.entries(routes)) {
+  if (routeController.submitExam) {
+    app.post(
+      "/submitExam/:studentId/:examId",
+      makeHandlerAwareOfAsyncErrors(routeController.submitExam)
+    );
+  }
+
   if (routeController.upload) {
     app.post(
       `/${routeName}/upload`,
@@ -80,6 +89,13 @@ for (const [routeName, routeController] of Object.entries(routes)) {
     );
   }
 
+  if (routeController.getByExamId) {
+    app.get(
+      `/${routeName}/examId/:id`,
+      makeHandlerAwareOfAsyncErrors(routeController.getByExamId)
+    );
+  }
+
   if (routeController.getByQuestionId) {
     app.get(
       `/${routeName}/questionId/:id`,
@@ -108,16 +124,29 @@ for (const [routeName, routeController] of Object.entries(routes)) {
     );
   }
 
+  if (routeController.getLaunchedExam) {
+    app.get(
+      `/${routeName}/get/launched`,
+      makeHandlerAwareOfAsyncErrors(routeController.getLaunchedExam)
+    );
+  }
+
   if (routeController.getByExamAndStudentId) {
     app.get(
       `/${routeName}/:examId/:studentId`,
       makeHandlerAwareOfAsyncErrors(routeController.getByExamAndStudentId)
     );
   }
+  if (routeController.setStatus) {
+    app.patch(
+      `/${routeName}/set/status`,
+      makeHandlerAwareOfAsyncErrors(routeController.setStatus)
+    );
+  }
 
   if (routeController.getAttendingStudents) {
     app.get(
-      `/${routeName}/:examId`,
+      `/${routeName}/student/get/attending/exam/:examId`,
       makeHandlerAwareOfAsyncErrors(routeController.getAttendingStudents)
     );
   }

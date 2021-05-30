@@ -10,6 +10,18 @@ const getByClassId = async (req, res) => {
   res.status(200).json(questions);
 };
 
+const getByExamId = async (req, res) => {
+  const examId = Number.parseInt(req.params.id, 10);
+  const examObj = await models.examModel.findByPk(examId);
+  const classId = examObj.getDataValue("classModelId");
+  const questions = await models.questionModel.findAll({
+    where: {
+      classModelId: classId,
+    },
+  });
+  res.status(200).json(questions);
+};
+
 const create = async (req, res) => {
   const body = req.body;
   const questionObj = {
@@ -39,4 +51,4 @@ const remove = async (req, res) => {
 //   const
 // }
 
-module.exports = { getByClassId, create, remove };
+module.exports = { getByClassId, getByExamId, create, remove };

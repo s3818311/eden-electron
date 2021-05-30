@@ -45,13 +45,13 @@ const Question = (props) => {
   const optionFormSubmit = async (formData) => {
     let optionId = null;
 
-    console.log(formData);
+    // console.log(formData);
 
     await fetch("http://localhost:3001/answers/addOption", {
       method: "POST",
       body: JSON.stringify({
         questionId: formData.questionId,
-        title: formData.optionName
+        title: formData.optionName,
       }),
       headers: {
         "Content-type": "application/json",
@@ -59,10 +59,9 @@ const Question = (props) => {
     })
       .then((res) => res.json())
       .then((res) => (optionId = res));
-
   };
 
-  const deleteOption = (evt) =>{
+  const deleteOption = (evt) => {
     evt.preventDefault();
     fetch("http://localhost:3001/answers/" + evt.target[0].value, {
       method: "DELETE",
@@ -88,7 +87,11 @@ const Question = (props) => {
               isSelected={false}
               optionId={99}
             />
-            <input type="hidden" value={props.questionObj.id} {...register("questionId")} />
+            <input
+              type="hidden"
+              value={props.questionObj.id}
+              {...register("questionId")}
+            />
             <input
               type="text"
               className="inline-block w-2/3 ml-10 border-b-2 focus:border-blue-400 focus:outline-none"
@@ -148,7 +151,7 @@ const Question = (props) => {
             <Loading />
           ) : (
             optionList.data.map((item, index) => {
-              console.log(item.isCorrectAnswer);
+              // console.log(item.isCorrectAnswer);
               return (
                 <div key={index} className="py-1 transition-all">
                   <div className="flex items-center">
@@ -163,15 +166,10 @@ const Question = (props) => {
                       placeholder={item.title}
                       onChange={() => setModified(true)}
                     /> */}
-                    <div className="inline-block w-2/3 ml-10">
-                      {item.title}
-                    </div>
+                    <div className="inline-block w-2/3 ml-10">{item.title}</div>
                     <div className="flex items-center flex-grow grid">
                       <form onSubmit={deleteOption}>
-                        <input
-                          type="hidden"
-                          value={item.id}
-                        ></input>
+                        <input type="hidden" value={item.id}></input>
                         <button
                           className="text-red-500 cursor-pointer place-self-end"
                           type="submit"
@@ -179,7 +177,6 @@ const Question = (props) => {
                           <AiFillDelete />
                         </button>
                       </form>
-
                     </div>
                   </div>
                 </div>

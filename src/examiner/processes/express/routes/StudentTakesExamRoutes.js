@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 const { models } = require("../../sequelize");
 const { Op } = require("sequelize");
+const { json } = require("sequelize");
 
 const getAll = async (req, res) => {
   const rows = await models.StudentTakesExam.findAll();
@@ -12,6 +13,9 @@ const getAttendingStudents = async (req, res) => {
   const rows = await models.StudentTakesExam.findAll({
     where: {
       examModelId: examId,
+      mark: {
+        [Op.not]: null,
+      },
     },
     attributes: ["studentModelId", "status"],
   });
@@ -58,6 +62,7 @@ const create = async (req, res) => {
 
   await req.body.studentIds.reduce(async (memo, studentId) => {
     await memo;
+    // eslint-disable-next-line no-unused-vars
     const [model, created] = await models.StudentTakesExam.findOrCreate({
       where: {
         studentModelId: studentId,
@@ -77,26 +82,11 @@ const create = async (req, res) => {
   existedRows.length == 0
     ? res.status(201).end()
     : res
-      .status(400)
-      .send(`Student(s) with id ${existedRows} already took this exam`);
-};
-
-const setMark = async (req, res) => {
-  await models.StudentTakesExam.update(
-    { mark: req.body.mark },
-    {
-      where: {
-        studentModelId: req.body.studentModelId,
-        examModelId: req.body.examModelId,
-      },
-    }
-  );
-
-  res.status(200).end();
+        .status(400)
+        .send(`Student(s) with id ${existedRows} already took this exam`);
 };
 
 const setStatus = async (req, res) => {
-  console.log(req.body);
   await models.StudentTakesExam.update(
     { status: req.body.status },
     {
@@ -110,11 +100,64 @@ const setStatus = async (req, res) => {
   res.status(200).end();
 };
 
+const submitExam = async (req, res) => {
+  const studentId = Number.parseInt(req.params.studentId, 10);
+  const examId = Number.parseInt(req.params.examId, 10);
+  const submittedExam = req.body.examData;
+  let qCount = 0;
+  let correctQCount = 0;
+
+  // Calculate mark
+  for (const question in submittedExam) {
+    if (Object.hasOwnProperty.call(submittedExam, question)) {
+      const optionId = Number.parseInt(submittedExam[question]);
+      const isCorrect = await models.answerModel
+        .findByPk(optionId, {
+          attributes: ["isCorrectAnswer"],
+        })
+        .then((res) => {
+          return res.getDataValue("isCorrectAnswer");
+        });
+
+      if (isCorrect) {
+        correctQCount++;
+      }
+
+      qCount++;
+    }
+  }
+
+  const finalMark = correctQCount / qCount;
+
+  // Update status
+  await models.StudentTakesExam.update(
+    { status: "NONE" },
+    {
+      where: {
+        studentModelId: studentId,
+        examModelId: examId,
+      },
+    }
+  );
+
+  // Update mark
+  await models.StudentTakesExam.update(
+    { mark: finalMark },
+    {
+      where: {
+        studentModelId: studentId,
+        examModelId: examId,
+      },
+    }
+  );
+
+  res.status(200).json({ total: qCount, correct: correctQCount });
+};
 module.exports = {
   getAll,
   getAttendingStudents,
   getByExamAndStudentId,
   create,
-  setMark,
   setStatus,
+  submitExam,
 };

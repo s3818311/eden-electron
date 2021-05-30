@@ -48,6 +48,19 @@ const remove = async (req, res) => {
   res.status(200).end();
 };
 
+const setStatus = async (req, res) => {
+  await models.examModel.update(
+    { status: req.body.status },
+    {
+      where: {
+        id: req.body.examModelId,
+      },
+    }
+  );
+
+  res.status(200).end();
+};
+
 module.exports = {
   getAll,
   getById,
@@ -55,4 +68,5 @@ module.exports = {
   getLaunchedExam,
   create,
   remove,
+  setStatus,
 };

@@ -12,7 +12,7 @@ const StartExam = (props) => {
   );
 
   const timeLimit = watch("hasTimeLimit");
-  const autoGrading = watch("autoGrading", false);
+  // const autoGrading = watch("autoGrading", false);
   const showParticipant = watch("participant", "all");
 
   const startExam = async (formData) => {
@@ -31,9 +31,10 @@ const StartExam = (props) => {
 
     const examObj = JSON.stringify({
       title: formData.title,
+      status: "LAUNCHED",
       instruction: formData.instruction,
       autoGrading: formData.autoGrading,
-      hasTimeLimit: formData.hasTimeLimit,
+      hasTimeLimit: !!formData.hasTimeLimit,
       timeLimit: formData.hasTimeLimit ? formData.timeLimit : null,
       shuffleAnswers: formData.shuffleAnswers,
       shuffleQuestions: formData.shuffleQuestions,
@@ -60,10 +61,8 @@ const StartExam = (props) => {
           headers: {
             "Content-type": "application/json",
           },
-        }).then((res) => {
-          console.log(res);
-          console.log(examId);
-          window.location.href = `http://localhost:3000/test?examId=${examId}`;
+        }).then(() => {
+          window.location.href = `http://localhost:3000/test?examId=${examId}&classId=${props.classId}`;
         });
       });
 
@@ -93,7 +92,9 @@ const StartExam = (props) => {
           <textarea
             cols="4"
             className="w-full h-auto px-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600"
-            {...register("instruction")}
+            {...register("instruction", {
+              required: true,
+            })}
           />
         </div>
 
@@ -142,6 +143,7 @@ const StartExam = (props) => {
             <input
               type="checkbox"
               className="w-4 h-5"
+              disabled
               {...register("hasTimeLimit")}
             />
             <div className="inline-block px-5">Time limit</div>
@@ -165,31 +167,31 @@ const StartExam = (props) => {
             <input
               type="checkbox"
               className="w-4 h-5"
+              defaultChecked={true}
               {...register("autoGrading")}
             />
             <div className="inline-block px-5">Auto grading</div>
           </div>
         </div>
 
-        {autoGrading && (
-          <div className="grid auto-rows-auto gap-y-1">
-            <div className="text-lg text-rmit-blue">Display grade</div>
-            <div className="flex flex-row items-center pl-7">
-              <input
-                type="checkbox"
-                className="w-4 h-5"
-                {...register("autoShowGrade")}
-              />
-              <div className="inline-block px-5">Auto show grades</div>
-            </div>
+        <div className="grid auto-rows-auto gap-y-1">
+          <div className="text-lg text-rmit-blue">Display grade</div>
+          <div className="flex flex-row items-center pl-7">
+            <input
+              type="checkbox"
+              className="w-4 h-5"
+              defaultChecked={true}
+              {...register("autoShowGrade")}
+            />
+            <div className="inline-block px-5">Auto show grades</div>
           </div>
-        )}
+        </div>
 
         <div className="flex justify-center">
           <button
             className="px-5 py-1 text-white cursor-pointer rounded-md bg-rmit-red disabled:opacity-50"
-            type="submit"
             disabled={!!studentsInClass.isLoading}
+            type="submit"
           >
             Start Exam
           </button>

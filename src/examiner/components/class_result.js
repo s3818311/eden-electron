@@ -17,7 +17,7 @@ const Exams = (props) => {
 
 const ExamMarks = (props) => {
   return props.exams.data.map((exam, index) => {
-    const mark = props.getMark(props.studentId, exam.id);
+    const mark = props.getMark(props.studentId, exam.id) * 100;
     return (
       <td key={index} className="px-2 py-1 text-center">
         {mark === null ? "DNA" : mark}
